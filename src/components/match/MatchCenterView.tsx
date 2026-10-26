@@ -279,14 +279,14 @@ export const MCS_CAPTAINS_RATINGS: PlayerRating[] = [
     photoSuitUrl: 'https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=600&q=80',
     photoFullKitUrl: 'https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=600&q=80',
     rating: 8.8,
-    highlightBadge: '💥 SOLO THUNDERBOLT GOLAZO',
+    highlightBadge: '💥 THUNDERBOLT GOLAZO • ASSIST: SAVAIZ',
     badgeColor: 'bg-emerald-400 text-[#080B12]',
     goals: 1,
     assists: 0,
     chancesCreated: 2,
     missedChances: 1,
-    keyStats: '1 Solo Thunderbolt Golazo (64\') • Unassisted Wonder Strike • 88% Pass Acc',
-    verdict: 'Sensational solo golazo! Drove past two MCS defenders with blistering pace and power on 64\', unleashing an unstoppable solo thunderbolt into the top corner for 2-2 without needing any assist.',
+    keyStats: '1 Thunderbolt Golazo (64\', Assist: Savaiz) • 88% Pass Acc • 2 Key Shots',
+    verdict: 'Sensational finish to restore parity! Received a sharp through-pass from Savaiz on 64\', took a devastating touch past the defender, and smashed an unstoppable thunderbolt rocket into the roof of the net for 2-2.',
     isStarting: true
   },
   {
@@ -392,15 +392,15 @@ export const MCS_CAPTAINS_RATINGS: PlayerRating[] = [
     photoUrl: '/players/savaiz.jpg',
     photoSuitUrl: '/players/savaiz-suit.png',
     photoFullKitUrl: '/players/savaiz.jpg',
-    rating: 7.0,
-    highlightBadge: '⚡ ACTIVE PRESSING • SUBBED 65\'',
-    badgeColor: 'bg-amber-500/20 text-amber-300 border border-amber-500/30',
+    rating: 7.7,
+    highlightBadge: '🎯 CLUTCH ASSIST (TO USMAN) • HIGH PRESS',
+    badgeColor: 'bg-[#C6FF00]/20 text-[#C6FF00] border border-[#C6FF00]/30',
     goals: 0,
-    assists: 0,
-    chancesCreated: 1,
+    assists: 1,
+    chancesCreated: 2,
     missedChances: 0,
-    keyStats: '65 Mins Played • 3 Pressing Recoveries • Substituted for Rafeeq',
-    verdict: 'High-energy starting forward in the 8-a-side duel. Stretched MCS defenders with relentless pressing before being substituted off in the 65th minute for Rafeeq.',
+    keyStats: '1 Crucial Assist (to Usman 64\') • 65 Mins Played • Substituted for Rafeeq',
+    verdict: 'Decisive playmaking and tireless work rate! After pressing MCS relentlessly for over an hour, Savaiz threaded a pinpoint through-pass into Usman’s path on 64\' to set up the 2-2 equalizer before making way for Rafeeq on 65\'.',
     isStarting: true,
     subMinute: 65,
     subWith: 'Rafeeq'
@@ -989,7 +989,7 @@ export const MatchCenterView: React.FC = () => {
                 </h2>
                 <p className="text-xs sm:text-sm text-[#929BA9] mt-1 font-mono">
                   {selectedMatchId === 'm-mcs-captains'
-                    ? 'Abrar 1G Solo + 1A (to Zohaib) + 9 Chances • Usman Solo Golazo • Zohaib Bullet Header • Jibran GK 8 Saves • Savaiz Sub with Rafeeq'
+                    ? 'Abrar 1G Solo + 1A (to Zohaib) + 9 Chances • Usman Golazo (Assist: Savaiz) • Zohaib Bullet Header • Jibran GK 8 Saves • Savaiz 1A Sub with Rafeeq'
                     : 'Sensational Volley, Free-Kick & Late Rush'}
                 </p>
 
@@ -1005,7 +1005,7 @@ export const MatchCenterView: React.FC = () => {
                       <div className="flex items-center gap-2 justify-center lg:justify-start">
                         <span className="text-[#C6FF00] font-mono">64&apos;</span>
                         <span className="font-bold">Usman</span>
-                        <span className="text-emerald-300 text-[11px] font-semibold">(Sensational Solo Thunderbolt Golazo! • 2-2)</span>
+                        <span className="text-emerald-300 text-[11px] font-semibold">(Sensational Thunderbolt Golazo! • Assist: Savaiz • 2-2)</span>
                       </div>
                       <div className="flex items-center gap-2 justify-center lg:justify-start">
                         <span className="text-[#C6FF00] font-mono">76&apos;</span>
@@ -1072,7 +1072,7 @@ export const MatchCenterView: React.FC = () => {
                   {selectedMatchId === 'm-mcs-captains' ? (
                     <>
                       <strong className="text-[#F5F7FA]">Verified 8-a-Side Match Breakdown (Wednesday Showcase): </strong>
-                      An electric 6-goal thriller! Coach FC captain <strong>Abrar was the undisputed Master of the Pitch</strong>, crafting an incredible <strong>9 BIG CHANCES CREATED</strong>, scoring an 18&apos; solo wonder goal, and delivering the pinpoint corner assist for Zohaib&apos;s 76&apos; bullet header. <strong>Usman</strong> powered home an unassisted solo thunderbolt golazo on 64&apos; with searing velocity. In goal, <strong>Jibran stepped in heroically as goalkeeper</strong>, pulling off <strong>8 decisive clutch saves</strong> to keep Coach FC in the match despite an unfortunate accidental back-heel clearance own goal on 52&apos; under intense pressure. In defense, <strong>Huzaifa proved defensively superior to Zohaib</strong> in reading ground challenges and positional duels. <strong>Aliyan</strong> maintained his standing as Coach FC’s clean sheet leader (16 CS), <strong>Faheem</strong> dictated tempo and distribution in midfield, while starting forward <strong>Savaiz</strong> pressed relentlessly for 65 minutes before being tactically substituted for <strong>Rafeeq</strong>, whose fresh energy on the right flank preserved the 3-3 draw. (Jamshaid and Hamza did not play).
+                      An electric 6-goal thriller! Coach FC captain <strong>Abrar was the undisputed Master of the Pitch</strong>, crafting an incredible <strong>9 BIG CHANCES CREATED</strong>, scoring an 18&apos; solo wonder goal, and delivering the pinpoint corner assist for Zohaib&apos;s 76&apos; bullet header. <strong>Usman</strong> powered home an emphatic thunderbolt golazo on 64&apos; after a precision pass from <strong>Savaiz</strong>. In goal, <strong>Jibran stepped in heroically as goalkeeper</strong>, pulling off <strong>8 decisive clutch saves</strong> to keep Coach FC in the match despite an unfortunate accidental back-heel clearance own goal on 52&apos; under intense pressure. In defense, <strong>Huzaifa proved defensively superior to Zohaib</strong> in reading ground challenges and positional duels. <strong>Aliyan</strong> maintained his standing as Coach FC’s clean sheet leader (16 CS), <strong>Faheem</strong> dictated tempo and distribution in midfield, while starting forward <strong>Savaiz</strong> pressed relentlessly for 65 minutes, delivered the crucial assist for Usman&apos;s 2-2 equalizer, and was tactically substituted for <strong>Rafeeq</strong>, whose fresh energy on the right flank preserved the 3-3 draw. (Jamshaid and Hamza did not play).
                     </>
                   ) : (
                     <>
@@ -1243,7 +1243,7 @@ export const MatchCenterView: React.FC = () => {
                 </div>
                 <p className="text-xs text-[#929BA9] mt-1 font-mono">
                   {selectedMatchId === 'm-mcs-captains'
-                    ? 'Ratings reflect Captain Abrar’s 9 big chances created, 1 solo goal & 1 assist to Zohaib, Usman’s solo golazo, Zohaib’s bullet header, Jibran’s 8 crucial saves despite accidental back-heel OG, Savaiz subbed 65\' for Rafeeq, and Faheem’s midfield control.'
+                    ? 'Ratings reflect Captain Abrar’s 9 big chances created, 1 solo goal & 1 assist to Zohaib, Usman’s golazo from Savaiz’s assist, Zohaib’s bullet header, Jibran’s 8 crucial saves despite accidental back-heel OG, Savaiz 1A subbed 65\' for Rafeeq, and Faheem’s midfield control.'
                     : 'Ratings reflect Abrar’s solo power strike & 2 assists, Faheem’s dodge goal, Aliyan’s volley, Sheryar’s free kick, Dilshad’s brace & misses, and Savaiz’s tap-in & missed chances.'}
                 </p>
               </div>
@@ -1441,7 +1441,7 @@ export const MatchCenterView: React.FC = () => {
                   </div>
                 </div>
 
-                {/* 64' USMAN SOLO THUNDERBOLT GOLAZO */}
+                {/* 64' USMAN THUNDERBOLT GOLAZO (ASSIST: SAVAIZ) */}
                 <div className="relative group">
                   <div className="absolute -left-[35px] sm:-left-[51px] top-1.5 w-7 h-7 rounded-full bg-[#C6FF00] text-[#080B12] flex items-center justify-center font-black text-xs shadow-[0_0_15px_rgba(198,255,0,0.5)]">
                     ⚽
@@ -1452,11 +1452,11 @@ export const MatchCenterView: React.FC = () => {
                       <span className="text-xs font-black text-[#F5F7FA]">2 - 2</span>
                     </div>
                     <h4 className="text-base font-bold text-[#F5F7FA] flex items-center gap-2">
-                      <span>Usman Solo Thunderbolt Golazo!</span>
-                      <span className="text-xs font-mono px-2 py-0.5 rounded bg-emerald-400/20 text-emerald-300">SOLO GOLAZO</span>
+                      <span>Usman Thunderbolt Golazo!</span>
+                      <span className="text-xs font-mono px-2 py-0.5 rounded bg-emerald-400/20 text-emerald-300">Assist: Savaiz</span>
                     </h4>
                     <p className="text-xs text-[#929BA9] mt-1">
-                      Unassisted solo magic! Usman receives the ball in transition, drives past two MCS defenders with blistering pace and strength, and smashes an unstoppable thunderbolt rocket into the top corner for 2-2!
+                      Sensational equalizer! Savaiz spots Usman&apos;s surging run and threads a pinpoint through-pass; Usman takes one devastating touch to burst past the defender and lashes an unstoppable thunderbolt rocket into the roof of the net for 2-2!
                     </p>
                   </div>
                 </div>
@@ -1906,7 +1906,7 @@ export const MatchCenterView: React.FC = () => {
                       <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between font-bold text-[#F5F7FA]">
                         <div className="flex items-center gap-2">
                           <span className="w-6 h-6 rounded-lg bg-emerald-500/30 text-emerald-200 font-mono font-bold flex items-center justify-center text-[10px]">20</span>
-                          <span>Usman (Midfielder • 64&apos; Solo Thunderbolt Golazo!)</span>
+                          <span>Usman (Midfielder • 64&apos; Thunderbolt Golazo • Assist: Savaiz)</span>
                         </div>
                         <span className="font-mono text-emerald-400 font-black">MID • 8.8</span>
                       </div>
@@ -1915,9 +1915,9 @@ export const MatchCenterView: React.FC = () => {
                       <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between font-bold text-[#F5F7FA]">
                         <div className="flex items-center gap-2">
                           <span className="w-6 h-6 rounded-lg bg-amber-500/30 text-amber-200 font-mono font-bold flex items-center justify-center text-[10px]">29</span>
-                          <span>Savaiz (Starting Forward • Subbed 65&apos; for Rafeeq)</span>
+                          <span>Savaiz (Starting Forward • 1 Assist to Usman • Subbed 65&apos; for Rafeeq)</span>
                         </div>
-                        <span className="font-mono text-amber-300 font-black">FWD • 7.0</span>
+                        <span className="font-mono text-amber-300 font-black">FWD • 7.7</span>
                       </div>
                     </div>
                   </div>

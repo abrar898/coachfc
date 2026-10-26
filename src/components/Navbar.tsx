@@ -46,9 +46,9 @@ export const Navbar: React.FC = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-4 sm:gap-6">
           {/* Logo */}
-          <Link href="/" className="group flex items-center gap-3">
+          <Link href="/" className="group flex items-center gap-3 shrink-0">
             <Crest size={44} showWordmark={true} />
           </Link>
 
@@ -60,7 +60,7 @@ export const Navbar: React.FC = () => {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`relative px-3.5 py-2 text-sm font-semibold tracking-wider uppercase transition-all duration-200 ${
+                  className={`relative px-2.5 lg:px-3.5 py-2 text-xs lg:text-sm font-semibold tracking-wider uppercase transition-all duration-200 ${
                     active
                       ? 'text-[#C6FF00]'
                       : 'text-[#929BA9] hover:text-[#F5F7FA]'

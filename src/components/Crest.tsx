@@ -6,9 +6,9 @@ interface CrestProps {
   showWordmark?: boolean;
 }
 
-export const Crest: React.FC<CrestProps> = ({ className = "w-10 h-10", size = 40, showWordmark = false }) => {
+export const Crest: React.FC<CrestProps> = ({ className = "", size = 40, showWordmark = false }) => {
   return (
-    <div className={`inline-flex items-center gap-3 ${className}`}>
+    <div className={`inline-flex items-center gap-3 shrink-0 ${className}`}>
       <svg
         width={size}
         height={size}

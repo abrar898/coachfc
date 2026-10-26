@@ -1024,7 +1024,9 @@ const DEFAULT_DB: DatabaseSchema = {
           team: "AWAY",
           playerId: "p-mid-usman",
           playerName: "Usman",
-          notes: "SOLO THUNDERBOLT GOLAZO! Usman wins the ball, bursts forward on a scintillating solo run past two defenders, and smashes an unstoppable thunderbolt volley into the roof of the net! 2-2.",
+          relatedPlayerId: "p-fwd-savaiz",
+          relatedPlayerName: "Savaiz",
+          notes: "EQUALIZER! Savaiz threads a precision through-pass past the MCS defense into Usman's run; Usman hammers an unstoppable thunderbolt rocket into the roof of the net! 2-2.",
           isVerified: true
         },
         {
@@ -1073,7 +1075,7 @@ const DEFAULT_DB: DatabaseSchema = {
         { playerId: "p-mid-faheem", playerName: "Faheem", position: "MID", shirtNumber: 6, isStarting: true, minutesPlayed: 90, goals: 0, assists: 0, yellowCards: 0, redCards: 0 },
         { playerId: "p-mid-abrar", playerName: "Abrar (Captain)", position: "MID", shirtNumber: 8, isStarting: true, minutesPlayed: 90, goals: 1, assists: 1, yellowCards: 0, redCards: 0 },
         { playerId: "p-mid-usman", playerName: "Usman", position: "MID", shirtNumber: 20, isStarting: true, minutesPlayed: 90, goals: 1, assists: 0, yellowCards: 0, redCards: 0 },
-        { playerId: "p-fwd-savaiz", playerName: "Savaiz", position: "FWD", shirtNumber: 29, isStarting: true, minutesPlayed: 65, goals: 0, assists: 0, yellowCards: 0, redCards: 0 },
+        { playerId: "p-fwd-savaiz", playerName: "Savaiz", position: "FWD", shirtNumber: 29, isStarting: true, minutesPlayed: 65, goals: 0, assists: 1, yellowCards: 0, redCards: 0 },
         { playerId: "p-fwd-rafeeq", playerName: "Rafeeq", position: "FWD", shirtNumber: 18, isStarting: false, minutesPlayed: 25, goals: 0, assists: 0, yellowCards: 0, redCards: 0 }
       ],
       matchStats: {
@@ -1115,14 +1117,14 @@ const DEFAULT_DB: DatabaseSchema = {
           photoUrl: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=600&q=80",
           rating: 8.8,
           isKeyPlayer: false,
-          highlightBadge: "💥 SOLO THUNDERBOLT GOLAZO",
+          highlightBadge: "💥 THUNDERBOLT GOLAZO • ASSIST: SAVAIZ",
           badgeColor: "bg-emerald-400 text-[#080B12]",
           goals: 1,
           assists: 0,
           chancesCreated: 2,
           missedChances: 1,
-          keyStats: "1 Solo Golazo • 3 Shots On Target • 88% Pass Acc",
-          verdict: "Sensational solo golazo! Drove past two MCS defenders with blistering pace and power, smashing an unstoppable thunderbolt into the top corner for 2-2."
+          keyStats: "1 Thunderbolt Golazo (Assist: Savaiz) • 3 Shots On Target • 88% Pass Acc",
+          verdict: "Sensational finish to restore parity! Received a sharp through-pass from Savaiz on 64', took a devastating touch past the defender, and smashed an unstoppable thunderbolt into the top corner for 2-2."
         },
         {
           name: "Zohaib",
@@ -1218,16 +1220,16 @@ const DEFAULT_DB: DatabaseSchema = {
           position: "Forward / Striker",
           photoUrl: "/players/savaiz.jpg",
           photoSuitUrl: "/players/savaiz-suit.png",
-          rating: 7.0,
+          rating: 7.7,
           isKeyPlayer: false,
-          highlightBadge: "⚡ ACTIVE PRESSING • SUBBED 65'",
-          badgeColor: "bg-amber-500/20 text-amber-300 border border-amber-500/30",
+          highlightBadge: "🎯 CLUTCH ASSIST (TO USMAN) • HIGH PRESS",
+          badgeColor: "bg-[#C6FF00]/20 text-[#C6FF00] border border-[#C6FF00]/30",
           goals: 0,
-          assists: 0,
-          chancesCreated: 1,
+          assists: 1,
+          chancesCreated: 2,
           missedChances: 0,
-          keyStats: "65 Mins Played • 3 Pressing Recoveries • Replaced by Rafeeq",
-          verdict: "High-energy starting forward in the 8-a-side battle. Stretched MCS center backs with constant pressing before being replaced by Rafeeq in the 65th minute."
+          keyStats: "1 Crucial Assist (to Usman 64') • 65 Mins Played • Subbed for Rafeeq",
+          verdict: "High-impact playmaking and work rate! Pressed relentlessly for over an hour and delivered the crucial pinpoint assist for Usman's 64' thunderbolt equalizer before being replaced by Rafeeq on 65'."
         },
         {
           name: "Rafeeq",
