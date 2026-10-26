@@ -239,7 +239,7 @@ export function BlueLockKitStudio() {
                 </text>
               </g>
 
-              {/* Number 8 for Tsukioynx */}
+              {/* Number 8 for Abrar */}
               <text
                 x="150"
                 y="255"
@@ -257,7 +257,7 @@ export function BlueLockKitStudio() {
 
           <div className="mt-4 flex items-center gap-2 text-xs font-mono text-[#929BA9]">
             <Eye className="w-3.5 h-3.5 text-blue-400" />
-            360° Studio Spec • Tsukioynx #8 Edition
+            360° Studio Spec • Abrar #8 Edition
           </div>
         </div>
 

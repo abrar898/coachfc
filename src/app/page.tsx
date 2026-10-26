@@ -5,7 +5,7 @@ import { Footer } from '@/components/Footer';
 
 export const metadata = {
   title: 'MCS Captains 3 - 3 Coach FC & Derby Hub | Match Center & Official Player Ratings',
-  description: 'Wednesday 21 October 2026. Official player ratings, 9 big chances created by Captain Tsukioynx (⭐ Key Player), goals from Abrar, Usman, Zohaib, 8 crucial saves by Hamza, and complete tactical telemetry.',
+  description: 'Wednesday 21 October 2026. Official player ratings, 9 big chances created by Captain Abrar (⭐ Key Player), goals from Abrar, Usman, Zohaib, 8 crucial saves by Hamza, and complete tactical telemetry.',
 };
 
 export default function HomePage() {

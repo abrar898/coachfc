@@ -489,31 +489,31 @@ const DEFAULT_DB: DatabaseSchema = {
       }
     },
     {
-      id: "p-mid-tsukioynx",
-      slug: "tsukioynx",
-      name: "Tsukioynx",
+      id: "p-mid-abrar",
+      slug: "abrar",
+      name: "Abrar",
       shirtNumber: 8,
       position: "MID",
-      secondaryPositions: ["CAM", "CM"],
-      nationality: "Japan",
-      nationalityCode: "JP",
+      secondaryPositions: ["CAM", "CM", "RW", "ST"],
+      nationality: "Pakistan",
+      nationalityCode: "PK",
       photoUrl: "/players/tsukioynx-coachfc-studio.jpg",
       dateOfBirth: "2001-11-18",
       age: 25,
-      heightCm: 178,
-      weightKg: 73,
+      heightCm: 180,
+      weightKg: 75,
       preferredFoot: "Both",
       status: "FIT",
-      statusNotes: "Maestro Playmaker & Chance Creator.",
-      bio: "Tactical architect in midfield with superhuman vision, pinpoint through-balls, and press-resistant ball handling under heavy pressure.",
-      contractUntil: "2029-06-30",
-      marketValue: "€78M",
+      statusNotes: "Club Captain & Maestro Playmaker.",
+      bio: "Tactical architect and inspirational team captain of Coach FC. Renowned for transcendent vision, creating 9 big chances, devastating strikes from midfield, and clutch captaincy.",
+      contractUntil: "2030-06-30",
+      marketValue: "€95M",
       joinedYear: 2022,
-      attributes: { pace: 87, shooting: 84, passing: 94, dribbling: 92, defending: 68, physical: 79 },
+      attributes: { pace: 92, shooting: 91, passing: 96, dribbling: 94, defending: 70, physical: 82 },
       seasonStats: {
-        appearances: 24, starts: 23, substituteIn: 1, minutesPlayed: 2040,
-        goals: 8, assists: 16, yellowCards: 2, redCards: 0,
-        passAccuracyPct: 90.8, shotsOnTarget: 28, tacklesWon: 34
+        appearances: 24, starts: 24, substituteIn: 0, minutesPlayed: 2160,
+        goals: 14, assists: 22, yellowCards: 2, redCards: 0,
+        passAccuracyPct: 92.4, shotsOnTarget: 44, tacklesWon: 38
       }
     },
     {
@@ -955,34 +955,6 @@ const DEFAULT_DB: DatabaseSchema = {
         goals: 11, assists: 8, yellowCards: 1, redCards: 0,
         passAccuracyPct: 85.2, shotsOnTarget: 36, tacklesWon: 19
       }
-    },
-    {
-      id: "p-fwd-abrar",
-      slug: "abrar",
-      name: "Abrar",
-      shirtNumber: 7,
-      position: "FWD",
-      secondaryPositions: ["RW", "LW", "CAM"],
-      nationality: "Pakistan",
-      nationalityCode: "PK",
-      photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80",
-      dateOfBirth: "2002-06-18",
-      age: 24,
-      heightCm: 180,
-      weightKg: 75,
-      preferredFoot: "Right",
-      status: "FIT",
-      statusNotes: "Clutch Winger & Lethal Finisher (1 Goal, 1 Assist vs MCS Captains).",
-      bio: "Electric forward whose lightning bursts down the flank, pinpoint crossing, and cold-blooded finishing tore MCS Captains apart in the 3-3 thriller.",
-      contractUntil: "2029-06-30",
-      marketValue: "€42M",
-      joinedYear: 2024,
-      attributes: { pace: 92, shooting: 88, passing: 86, dribbling: 90, defending: 52, physical: 78 },
-      seasonStats: {
-        appearances: 18, starts: 14, substituteIn: 4, minutesPlayed: 1340,
-        goals: 8, assists: 7, yellowCards: 1, redCards: 0,
-        passAccuracyPct: 88.2, shotsOnTarget: 24, tacklesWon: 22
-      }
     }
   ],
   matches: [
@@ -1015,11 +987,9 @@ const DEFAULT_DB: DatabaseSchema = {
           period: "1H",
           type: "GOAL",
           team: "AWAY",
-          playerId: "p-fwd-abrar",
-          playerName: "Abrar",
-          relatedPlayerId: "p-mid-tsukioynx",
-          relatedPlayerName: "Tsukioynx (Captain)",
-          notes: "GOLAZO! Tsukioynx engineers one of his 9 big chances with a razor-sharp through-ball; Abrar cuts inside and lasers a clinical finish into the far corner! Coach FC lead 0-1.",
+          playerId: "p-mid-abrar",
+          playerName: "Abrar (Captain)",
+          notes: "GOLAZO! Captain Abrar cuts inside with blistering pace and lasers a clinical finish into the far corner! Coach FC lead 0-1.",
           isVerified: true
         },
         {
@@ -1054,9 +1024,9 @@ const DEFAULT_DB: DatabaseSchema = {
           team: "AWAY",
           playerId: "p-mid-usman",
           playerName: "Usman",
-          relatedPlayerId: "p-fwd-abrar",
-          relatedPlayerName: "Abrar",
-          notes: "EQUALIZER! Abrar burns his marker on the right flank and whips in a pinpoint cross; Usman thumps a sensational volley into the roof of the net! 2-2.",
+          relatedPlayerId: "p-mid-abrar",
+          relatedPlayerName: "Abrar (Captain)",
+          notes: "EQUALIZER! Captain Abrar burns his marker on the flank and whips in a pinpoint cross; Usman thumps a sensational volley into the roof of the net! 2-2.",
           isVerified: true
         },
         {
@@ -1068,9 +1038,9 @@ const DEFAULT_DB: DatabaseSchema = {
           team: "AWAY",
           playerId: "p-def-zohaib",
           playerName: "Zohaib",
-          relatedPlayerId: "p-mid-tsukioynx",
-          relatedPlayerName: "Tsukioynx (Captain)",
-          notes: "BULLET HEADER! Tsukioynx swings in an exquisite corner delivery (another big chance created); Zohaib rises above everybody to hammer in a thumping header! Coach FC lead 2-3.",
+          relatedPlayerId: "p-mid-abrar",
+          relatedPlayerName: "Abrar (Captain)",
+          notes: "BULLET HEADER! Captain Abrar swings in an exquisite corner delivery (one of his 9 big chances created); Zohaib rises above everybody to hammer in a thumping header! Coach FC lead 2-3.",
           isVerified: true
         },
         {
@@ -1091,9 +1061,8 @@ const DEFAULT_DB: DatabaseSchema = {
         { playerId: "p-def-huzaifa", playerName: "Huzaifa", position: "DEF", shirtNumber: 5, isStarting: true, minutesPlayed: 90, goals: 0, assists: 0, yellowCards: 0, redCards: 0 },
         { playerId: "p-def-zohaib", playerName: "Zohaib", position: "DEF", shirtNumber: 16, isStarting: true, minutesPlayed: 90, goals: 1, assists: 0, yellowCards: 1, redCards: 0 },
         { playerId: "p-def-aliyan", playerName: "Aliyan", position: "DEF", shirtNumber: 26, isStarting: true, minutesPlayed: 90, goals: 0, assists: 0, yellowCards: 0, redCards: 0 },
-        { playerId: "p-mid-tsukioynx", playerName: "Tsukioynx", position: "MID", shirtNumber: 8, isStarting: true, minutesPlayed: 90, goals: 0, assists: 2, yellowCards: 0, redCards: 0 },
-        { playerId: "p-mid-usman", playerName: "Usman", position: "MID", shirtNumber: 20, isStarting: true, minutesPlayed: 90, goals: 1, assists: 0, yellowCards: 0, redCards: 0 },
-        { playerId: "p-fwd-abrar", playerName: "Abrar", position: "FWD", shirtNumber: 7, isStarting: true, minutesPlayed: 90, goals: 1, assists: 1, yellowCards: 0, redCards: 0 }
+        { playerId: "p-mid-abrar", playerName: "Abrar (Captain)", position: "MID", shirtNumber: 8, isStarting: true, minutesPlayed: 90, goals: 1, assists: 2, yellowCards: 0, redCards: 0 },
+        { playerId: "p-mid-usman", playerName: "Usman", position: "MID", shirtNumber: 20, isStarting: true, minutesPlayed: 90, goals: 1, assists: 0, yellowCards: 0, redCards: 0 }
       ],
       matchStats: {
         possessionPct: [48, 52],
@@ -1108,39 +1077,23 @@ const DEFAULT_DB: DatabaseSchema = {
       },
       playerRatings: [
         {
-          name: "Tsukioynx",
+          name: "Abrar",
           team: "Coach FC",
           number: 8,
           position: "Midfield / Captain",
           photoUrl: "/players/tsukioynx-coachfc-studio.jpg",
           photoSuitUrl: "/players/tsukioynx-real.jpg",
-          rating: 9.7,
+          photoFullKitUrl: "/players/tsukioynx-coachfc-studio.jpg",
+          rating: 9.8,
           isKeyPlayer: true,
-          highlightBadge: "⭐ SUPER KEY PLAYER • 9 BIG CHANCES",
+          highlightBadge: "⭐ SUPER KEY PLAYER • 1 GOAL, 2 ASSISTS & 9 BIG CHANCES",
           badgeColor: "bg-[#C6FF00] text-[#080B12]",
-          goals: 0,
+          goals: 1,
           assists: 2,
           chancesCreated: 9,
           missedChances: 0,
-          keyStats: "9 Big Chances Created • 2 Clear Assists • 94% Pass Acc",
-          verdict: "Pure captain's genius! Tsukioynx single-handedly shredded the MCS defensive structure by creating 9 BIG CHANCES. Delivered pinpoint assists to Abrar and Zohaib while orchestrating all Coach FC transitions."
-        },
-        {
-          name: "Abrar",
-          team: "Coach FC",
-          number: 7,
-          position: "Forward / Winger",
-          photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80",
-          rating: 9.1,
-          isKeyPlayer: false,
-          highlightBadge: "⚽ 1 GOAL & 1 ASSIST MASTERPIECE",
-          badgeColor: "bg-amber-400 text-[#080B12]",
-          goals: 1,
-          assists: 1,
-          chancesCreated: 3,
-          missedChances: 0,
-          keyStats: "1 Clinical Goal • 1 Pinpoint Assist to Usman • 5 Dribbles",
-          verdict: "Unstoppable attacking force. Slotted in the opening goal with poise from Tsukioynx's pass, then carved open MCS down the right to tee up Usman's thunderbolt volley."
+          keyStats: "1 Goal • 2 Pinpoint Assists • 9 Big Chances Created • 95% Pass Acc",
+          verdict: "Pure captain's genius! Abrar completely dominated the match: opened the scoring on 18' with ice in his veins, single-handedly shredded MCS Captains by creating 9 BIG CHANCES, and delivered 2 laser assists to Usman and Zohaib!"
         },
         {
           name: "Usman",
@@ -1226,7 +1179,7 @@ const DEFAULT_DB: DatabaseSchema = {
           chancesCreated: 0,
           missedChances: 0,
           keyStats: "1 Aerial Bullet Header Goal • 3 Marking Lapses • 4 Clearances",
-          verdict: "Rose majestically to head in Tsukioynx's corner for 2-3! However, struggled badly in defensive duties with mistimed tackles and lost runners as MCS scored 3 goals."
+          verdict: "Rose majestically to head in Abrar's corner for 2-3! However, struggled badly in defensive duties with mistimed tackles and lost runners as MCS scored 3 goals."
         },
         {
           name: "Hamza",
@@ -1302,9 +1255,9 @@ const DEFAULT_DB: DatabaseSchema = {
           team: "HOME",
           playerId: "p-fwd-dilshad",
           playerName: "Dilshad (Blue Lock)",
-          relatedPlayerId: "p-mid-tsukioynx",
-          relatedPlayerName: "Tsukioynx",
-          notes: "Clear Goal! Dilshad is played through by Tsukioynx (Assist 1), performs a slick body dodge around keeper Hamza, and rolls into the empty net! 1-1.",
+          relatedPlayerId: "p-mid-abrar",
+          relatedPlayerName: "Abrar",
+          notes: "Clear Goal! Dilshad is played through by Abrar (Assist 1), performs a slick body dodge around keeper Hamza, and rolls into the empty net! 1-1.",
           isVerified: true
         },
         {
@@ -1326,9 +1279,9 @@ const DEFAULT_DB: DatabaseSchema = {
           period: "1H",
           type: "GOAL",
           team: "HOME",
-          playerId: "p-mid-tsukioynx",
-          playerName: "Tsukioynx (Blue Lock)",
-          notes: "WONDERGOAL! Tsukioynx embarks on a solo run from midfield, slices directly past two defenders, and unleashes a proper venomous power shot into the top corner! 2-1.",
+          playerId: "p-mid-abrar",
+          playerName: "Abrar (Blue Lock)",
+          notes: "WONDERGOAL! Abrar embarks on a solo run from midfield, slices directly past two defenders, and unleashes a proper venomous power shot into the top corner! 2-1.",
           isVerified: true
         },
         {
@@ -1388,9 +1341,9 @@ const DEFAULT_DB: DatabaseSchema = {
           team: "HOME",
           playerId: "p-fwd-dilshad",
           playerName: "Dilshad (Blue Lock)",
-          relatedPlayerId: "p-mid-tsukioynx",
-          relatedPlayerName: "Tsukioynx",
-          notes: "Brace for Dilshad! Tsukioynx carves open the defense with his 2nd clear assist of the night for Dilshad to finish with power for 4-2.",
+          relatedPlayerId: "p-mid-abrar",
+          relatedPlayerName: "Abrar",
+          notes: "Brace for Dilshad! Abrar carves open the defense with his 2nd clear assist of the night for Dilshad to finish with power for 4-2.",
           isVerified: true
         },
         {
@@ -1463,9 +1416,9 @@ const DEFAULT_DB: DatabaseSchema = {
       attendance: "61,200",
       referee: "Howard Webb",
       events: [
-        { id: "e8-1", matchId: "m-8oct", minute: 9, period: "1H", type: "GOAL", team: "AWAY", playerName: "Hammad (Blue Lock)", relatedPlayerName: "Tsukioynx", notes: "Hammad scores early for Blue Lock FC off Tsukioynx's first assist. 0-1.", isVerified: true },
+        { id: "e8-1", matchId: "m-8oct", minute: 9, period: "1H", type: "GOAL", team: "AWAY", playerName: "Hammad (Blue Lock)", relatedPlayerName: "Abrar", notes: "Hammad scores early for Blue Lock FC off Abrar's first assist. 0-1.", isVerified: true },
         { id: "e8-2", matchId: "m-8oct", minute: 16, period: "1H", type: "GOAL", team: "HOME", playerName: "Usman (Coach FC)", notes: "Usman equalizes for Coach FC with a clinical low drive! 1-1.", isVerified: true },
-        { id: "e8-3", matchId: "m-8oct", minute: 24, period: "1H", type: "GOAL", team: "AWAY", playerName: "Tsukioynx (Blue Lock)", notes: "Tsukioynx scores from the edge of the box to restore Blue Lock's lead. 1-2.", isVerified: true },
+        { id: "e8-3", matchId: "m-8oct", minute: 24, period: "1H", type: "GOAL", team: "AWAY", playerName: "Abrar (Blue Lock)", notes: "Abrar scores from the edge of the box to restore Blue Lock's lead. 1-2.", isVerified: true },
         { id: "e8-4", matchId: "m-8oct", minute: 33, period: "1H", type: "GOAL", team: "HOME", playerName: "Husnain (Coach FC)", relatedPlayerName: "Usman", notes: "Husnain scores for Coach FC after an assist from Usman! 2-2.", isVerified: true },
         { id: "e8-5", matchId: "m-8oct", minute: 41, period: "1H", type: "GOAL", team: "AWAY", playerName: "Dilshad (Blue Lock)", notes: "Dilshad clinical strike right before halftime for Blue Lock. 2-3.", isVerified: true },
         { id: "e8-6", matchId: "m-8oct", minute: 49, period: "2H", type: "GOAL", team: "HOME", playerName: "Aliyan (Coach FC)", notes: "Aliyan levels for Coach FC with a stinging drive from the right wing! 3-3.", isVerified: true },
@@ -1473,7 +1426,7 @@ const DEFAULT_DB: DatabaseSchema = {
         { id: "e8-8", matchId: "m-8oct", minute: 66, period: "2H", type: "GOAL", team: "HOME", playerName: "Husnain (Coach FC)", notes: "Husnain bags his brace with a sharp poacher's finish! 4-4.", isVerified: true },
         { id: "e8-9", matchId: "m-8oct", minute: 75, period: "2H", type: "GOAL", team: "HOME", playerName: "Usman (Coach FC)", notes: "Usman bags his 2nd goal with a magnificent curling strike! Coach FC lead 5-4.", isVerified: true },
         { id: "e8-10", matchId: "m-8oct", minute: 82, period: "2H", type: "GOAL", team: "AWAY", playerName: "Zohaib (Blue Lock)", notes: "Zohaib powers home an aerial bullet header off a set-piece for Blue Lock! 5-5.", isVerified: true },
-        { id: "e8-11", matchId: "m-8oct", minute: 89, period: "2H", type: "GOAL", team: "AWAY", playerName: "Dilshad (Blue Lock)", relatedPlayerName: "Tsukioynx", notes: "Dilshad scores his 2nd goal from Tsukioynx's 2nd assist for a breathtaking 5-6 winner for Blue Lock FC!", isVerified: true }
+        { id: "e8-11", matchId: "m-8oct", minute: 89, period: "2H", type: "GOAL", team: "AWAY", playerName: "Dilshad (Blue Lock)", relatedPlayerName: "Abrar", notes: "Dilshad scores his 2nd goal from Abrar's 2nd assist for a breathtaking 5-6 winner for Blue Lock FC!", isVerified: true }
       ],
       matchStats: {
         possessionPct: [43, 57],
@@ -1573,7 +1526,7 @@ const DEFAULT_DB: DatabaseSchema = {
       id: "form-1",
       name: "4-3-3 High Press (Default)",
       preset: "4-3-3",
-      description: "Mushaf on left wing, Sibas in center attack, Hammad on right wing. Faheem anchoring behind Tsukioynx and Jibran.",
+      description: "Mushaf on left wing, Sibas in center attack, Hammad on right wing. Faheem anchoring behind Abrar and Jibran.",
       updatedAt: "2026-10-18",
       isDefault: true,
       benchPlayerIds: ["p-fwd-adan", "p-fwd-muhammad", "p-def-shakeel", "p-mid-kayani", "p-fwd-dilshad"],
@@ -1584,7 +1537,7 @@ const DEFAULT_DB: DatabaseSchema = {
         { slotId: "s-4", positionName: "RCB", x: 62, y: 25, playerId: "p-def-huzaifa" },
         { slotId: "s-5", positionName: "RB", x: 82, y: 28, playerId: "p-def-jamshaid" },
         { slotId: "s-6", positionName: "CDM", x: 50, y: 45, playerId: "p-mid-faheem" },
-        { slotId: "s-7", positionName: "LCM", x: 32, y: 60, playerId: "p-mid-tsukioynx" },
+        { slotId: "s-7", positionName: "LCM", x: 32, y: 60, playerId: "p-mid-abrar" },
         { slotId: "s-8", positionName: "RCM", x: 68, y: 60, playerId: "p-mid-jibran" },
         { slotId: "s-9", positionName: "LW", x: 20, y: 82, playerId: "p-fwd-mushaf" },
         { slotId: "s-10", positionName: "ST", x: 50, y: 88, playerId: "p-fwd-sibas" },
@@ -1595,7 +1548,7 @@ const DEFAULT_DB: DatabaseSchema = {
       id: "form-2",
       name: "4-2-3-1 Apex Strike",
       preset: "4-2-3-1",
-      description: "Dual pivot with Faheem and Kayani; Adan, Tsukioynx, and Mushaf supporting Muhammad.",
+      description: "Dual pivot with Faheem and Kayani; Adan, Abrar, and Mushaf supporting Muhammad.",
       updatedAt: "2026-10-18",
       benchPlayerIds: ["p-fwd-sibas", "p-def-basit", "p-def-maaz", "p-mid-usman"],
       slots: [
@@ -1606,7 +1559,7 @@ const DEFAULT_DB: DatabaseSchema = {
         { slotId: "s-5", positionName: "RB", x: 82, y: 26, playerId: "p-def-jamshaid" },
         { slotId: "s-6", positionName: "LDM", x: 36, y: 44, playerId: "p-mid-faheem" },
         { slotId: "s-7", positionName: "RDM", x: 64, y: 44, playerId: "p-mid-kayani" },
-        { slotId: "s-8", positionName: "CAM", x: 50, y: 65, playerId: "p-mid-tsukioynx" },
+        { slotId: "s-8", positionName: "CAM", x: 50, y: 65, playerId: "p-mid-abrar" },
         { slotId: "s-9", positionName: "LAM", x: 20, y: 76, playerId: "p-fwd-mushaf" },
         { slotId: "s-10", positionName: "RAM", x: 80, y: 76, playerId: "p-fwd-adan" },
         { slotId: "s-11", positionName: "ST", x: 50, y: 88, playerId: "p-fwd-muhammad" }
@@ -1617,7 +1570,7 @@ const DEFAULT_DB: DatabaseSchema = {
     {
       id: "n-1",
       slug: "apex-derby-tactical-masterclass-preview",
-      title: "Inside the Camp: Mushaf, Sibas & Tsukioynx Primed for The Apex Derby",
+      title: "Inside the Camp: Mushaf, Sibas & Abrar Primed for The Apex Derby",
       excerpt: "Tactical pressing triggers, high-line defensive compacting by Zohaib and Huzaifa, and the key duels that will decide Sunday.",
       content: `The stage is set under the floodlights of The Apex Arena. With Coach FC sitting atop the league table, this weekend’s clash against Manchester Athletic represents more than 3 points — it is a defining test of club mentality.
 
@@ -1712,11 +1665,16 @@ function getStore(): DatabaseSchema {
       const cached = window.localStorage.getItem('coachfc_db');
       if (cached) {
         const parsed = JSON.parse(cached) as DatabaseSchema;
+        // Purge legacy Tsukioynx and duplicate Abrar IDs
+        parsed.players = parsed.players.filter(p => p.id !== 'p-mid-tsukioynx' && p.id !== 'p-fwd-abrar');
+
         // Merge missing default matches (e.g. m-mcs-captains)
         DEFAULT_DB.matches.forEach(defMatch => {
           const matchIdx = parsed.matches.findIndex(m => m.id === defMatch.id);
           if (matchIdx === -1) {
             parsed.matches.unshift(defMatch);
+          } else if (defMatch.id === 'm-mcs-captains') {
+            parsed.matches[matchIdx] = defMatch;
           }
         });
         // Merge missing players (e.g. Abrar) and synchronize clean sheet & photo updates
@@ -1725,6 +1683,7 @@ function getStore(): DatabaseSchema {
           if (!existing) {
             parsed.players.push(defPlayer);
           } else {
+            existing.name = defPlayer.name;
             existing.seasonStats.cleanSheets = defPlayer.seasonStats.cleanSheets;
             existing.attributes = defPlayer.attributes;
             existing.statusNotes = defPlayer.statusNotes;

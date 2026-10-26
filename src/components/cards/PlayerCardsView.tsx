@@ -49,32 +49,32 @@ export interface UltimatePlayerCard {
 
 export const ULTIMATE_PLAYERS: UltimatePlayerCard[] = [
   {
-    id: "tsukioynx-8",
-    name: "Tsukioynx",
-    slug: "tsukioynx",
-    team: "Blue Lock FC",
+    id: "abrar-8",
+    name: "Abrar",
+    slug: "abrar",
+    team: "Coach FC",
     number: 8,
     position: "CAM",
-    positionFull: "Attacking Playmaker",
+    positionFull: "Captain • Playmaker Maestro",
     photoUrl: "/players/tsukioynx-coachfc-studio.jpg",
     photoFullKitUrl: "/players/tsukioynx-coachfc-studio.jpg",
     photoSuitUrl: "/players/tsukioynx-real.jpg",
     cardTier: "ICON",
-    overallRating: 95,
+    overallRating: 96,
     stats: {
-      pace: 92,
+      pace: 93,
       shooting: 96,
-      passing: 95,
+      passing: 98,
       dribbling: 97,
-      defending: 68,
-      physical: 84
+      defending: 72,
+      physical: 85
     },
-    signatureMove: "Midfield Solo Power Cannon",
-    playStyle: "Egoist Maestro • Direct Penetration",
-    archetype: "Metavision Playmaker",
-    workRate: "High / Med",
-    preferredFoot: "Right",
-    bio: "Unplayable midfield orchestrator who slices defensive blocks apart and strikes venomous long-range power finishes."
+    signatureMove: "9 Big Chances Created • 1G+2A Masterclass",
+    playStyle: "Captain Maestro • Total Game Controller",
+    archetype: "Metavision Architect",
+    workRate: "High / High",
+    preferredFoot: "Both",
+    bio: "The indisputable captain and heartbeat of Coach FC. Shredded MCS Captains with 9 big chances created, 1 goal, and 2 assists in the 3-3 thriller, coupled with a solo wondergoal in the derby."
   },
   {
     id: "faheem-6",
@@ -327,33 +327,6 @@ export const ULTIMATE_PLAYERS: UltimatePlayerCard[] = [
     workRate: "Med / Low",
     preferredFoot: "Right",
     bio: "Poked in a 4-3 scramble finish amidst heavy goalmouth traffic, dangerous whenever balls drop inside the 6-yard box."
-  },
-  {
-    id: "abrar-7",
-    name: "Abrar",
-    slug: "abrar",
-    team: "Coach FC",
-    number: 7,
-    position: "RW",
-    positionFull: "Right Wing Inverted Slasher",
-    photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80",
-    photoFullKitUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80",
-    cardTier: "HERO",
-    overallRating: 88,
-    stats: {
-      pace: 93,
-      shooting: 89,
-      passing: 87,
-      dribbling: 91,
-      defending: 52,
-      physical: 79
-    },
-    signatureMove: "Searing Wing Cut-In & Assist",
-    playStyle: "Direct Flank Assassin",
-    archetype: "Clutch Winger",
-    workRate: "High / Med",
-    preferredFoot: "Right",
-    bio: "Masterclass winger who dismantled MCS Captains with 1 clinical goal and 1 laser assist to Usman in the 3-3 thriller."
   }
 ];
 

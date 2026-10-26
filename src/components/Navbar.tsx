@@ -26,9 +26,9 @@ export const Navbar: React.FC = () => {
   const navLinks = [
     { name: 'Match Center', href: '/' },
     { name: 'Player Ratings', href: '/#ratings' },
-    { name: 'Goals & Timeline', href: '/#timeline' },
+    { name: 'FUT Cards', href: '/cards' },
+    { name: 'Timeline', href: '/#timeline' },
     { name: 'Derby History', href: '/#derby-history' },
-    { name: 'Possession & Stats', href: '/#stats' },
     { name: 'Squad', href: '/squad' },
   ];
 

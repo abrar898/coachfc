@@ -49,7 +49,7 @@ interface PlayerRating {
 
 const PLAYER_RATINGS: PlayerRating[] = [
   {
-    name: 'Tsukioynx',
+    name: 'Abrar',
     team: 'Blue Lock FC',
     number: 8,
     position: 'Midfield / Playmaker',
@@ -208,7 +208,7 @@ const PLAYER_RATINGS: PlayerRating[] = [
     chancesCreated: 0,
     missedChances: 0,
     keyStats: '11.4 km Covered • 4 Interceptions • 7 Recoveries',
-    verdict: 'Battled bravely in midfield against Tsukioynx and Faheem to break up passing rhythms and launch quick transitions.'
+    verdict: 'Battled bravely in midfield against Abrar and Faheem to break up passing rhythms and launch quick transitions.'
   },
   {
     name: 'Savaiz',
@@ -232,40 +232,22 @@ const PLAYER_RATINGS: PlayerRating[] = [
 
 export const MCS_CAPTAINS_RATINGS: PlayerRating[] = [
   {
-    name: 'Tsukioynx',
+    name: 'Abrar',
     team: 'Coach FC',
     number: 8,
-    position: 'Midfield / Captain',
+    position: 'Midfield / Captain & Playmaker',
     photoUrl: '/players/tsukioynx-coachfc-studio.jpg',
     photoSuitUrl: '/players/tsukioynx-real.jpg',
     photoFullKitUrl: '/players/tsukioynx-coachfc-studio.jpg',
-    rating: 9.7,
+    rating: 9.8,
     highlightBadge: '⭐ SUPER KEY PLAYER • 9 BIG CHANCES',
     badgeColor: 'bg-[#C6FF00] text-[#080B12]',
-    goals: 0,
+    goals: 1,
     assists: 2,
     chancesCreated: 9,
     missedChances: 0,
-    keyStats: '9 Big Chances Created • 2 Clear Assists • 94% Pass Acc',
-    verdict: 'Captain’s masterclass! Completely carved open the MCS Captains backline, creating 9 BIG CHANCES and delivering 2 pinpoint assists (Abrar 18\', Zohaib 76\') in an electrifying midfield display.'
-  },
-  {
-    name: 'Abrar',
-    team: 'Coach FC',
-    number: 7,
-    position: 'Forward / Winger',
-    photoUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80',
-    photoSuitUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80',
-    photoFullKitUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80',
-    rating: 9.1,
-    highlightBadge: '⚽ 1 GOAL & 1 ASSIST MASTERPIECE',
-    badgeColor: 'bg-amber-400 text-[#080B12]',
-    goals: 1,
-    assists: 1,
-    chancesCreated: 3,
-    missedChances: 0,
-    keyStats: '1 Clinical Goal • 1 Laser Cross Assist to Usman • 5 Dribbles',
-    verdict: 'Deadly winger performance. Opened the scoring on 18\' off Tsukioynx’s pass with cold composure, then whipped in a world-class cross for Usman’s 64\' volley equalizer.'
+    keyStats: '1 Goal • 2 Assists • 9 Big Chances Created • 95% Pass Acc',
+    verdict: 'Undisputed Master of the Pitch and Captain’s masterclass! Scored the clinical 18\' opening goal, orchestrated 2 assists (for Usman’s 64\' volley and Zohaib’s 76\' header), and engineered an astonishing 9 BIG CHANCES CREATED.'
   },
   {
     name: 'Usman',
@@ -319,7 +301,7 @@ export const MCS_CAPTAINS_RATINGS: PlayerRating[] = [
     chancesCreated: 1,
     missedChances: 0,
     keyStats: '4 Tackles • 89% Pass Acc • 2 Crucial Interceptions',
-    verdict: 'Resolute shift in the official Coach FC kit with boots on the pitch. Closed down MCS wide overloads and linked effectively with Tsukioynx and Abrar.'
+    verdict: 'Resolute shift in the official Coach FC kit with boots on the pitch. Closed down MCS wide overloads and linked effectively with Captain Abrar and the midfield.'
   },
   {
     name: 'Huzaifa',
@@ -355,7 +337,7 @@ export const MCS_CAPTAINS_RATINGS: PlayerRating[] = [
     chancesCreated: 0,
     missedChances: 0,
     keyStats: '1 Aerial Bullet Header Goal • 3 Marking Lapses • 4 Clearances',
-    verdict: 'Magnificent bullet header on 76\' from Tsukioynx’s corner to put Coach FC ahead 3-2! However, had severe defensive lapses and lost markers alongside Huzaifa, conceding 3 goals.'
+    verdict: 'Magnificent bullet header on 76\' from Captain Abrar’s pinpoint corner to put Coach FC ahead 3-2! However, had severe defensive lapses and lost markers alongside Huzaifa, conceding 3 goals.'
   },
   {
     name: 'Hamza',
@@ -657,25 +639,25 @@ export const MatchCenterView: React.FC = () => {
                     </>
                   ) : (
                     <>
-                      <div className="flex items-center gap-2 lg:justify-end">
+                      <div className="flex items-center gap-2 justify-center lg:justify-end">
                         <span className="text-[#C6FF00] font-mono">28&apos;</span>
                         <span className="font-bold">Dilshad</span>
-                        <span className="text-blue-300 text-[11px] font-semibold">(Keeper Dodge Goal • Assist: Tsukioynx)</span>
+                        <span className="text-blue-300 text-[11px] font-semibold">(Keeper Dodge Goal • Assist: Abrar)</span>
                       </div>
-                      <div className="flex items-center gap-2 lg:justify-end">
+                      <div className="flex items-center gap-2 justify-center lg:justify-end">
                         <span className="text-[#C6FF00] font-mono">39&apos;</span>
-                        <span className="font-bold">Tsukioynx</span>
+                        <span className="font-bold">Abrar</span>
                         <span className="text-[#C6FF00] text-[11px] font-semibold">(Midfield Solo Run • Power Shot)</span>
                       </div>
-                      <div className="flex items-center gap-2 lg:justify-end">
+                      <div className="flex items-center gap-2 justify-center lg:justify-end">
                         <span className="text-[#C6FF00] font-mono">63&apos;</span>
                         <span className="font-bold">Faheem</span>
                         <span className="text-cyan-300 text-[11px] font-semibold">(Clear Dodge: Defender & Keeper)</span>
                       </div>
-                      <div className="flex items-center gap-2 lg:justify-end">
+                      <div className="flex items-center gap-2 justify-center lg:justify-end">
                         <span className="text-[#C6FF00] font-mono">74&apos;</span>
                         <span className="font-bold">Dilshad</span>
-                        <span className="text-blue-300 text-[11px] font-semibold">(Clear Finish • Assist: Tsukioynx)</span>
+                        <span className="text-blue-300 text-[11px] font-semibold">(Clear Finish • Assist: Abrar)</span>
                       </div>
                     </>
                   )}
@@ -713,7 +695,7 @@ export const MatchCenterView: React.FC = () => {
                 </h2>
                 <p className="text-xs sm:text-sm text-[#929BA9] mt-1 font-mono">
                   {selectedMatchId === 'm-mcs-captains'
-                    ? 'Tsukioynx 9 Chances • Abrar 1G+1A • Usman Volley • Zohaib Header'
+                    ? 'Abrar 9 Chances • 1G+2A • Usman Volley • Zohaib Header'
                     : 'Sensational Volley, Free-Kick & Late Rush'}
                 </p>
 
@@ -721,35 +703,35 @@ export const MatchCenterView: React.FC = () => {
                 <div className="mt-5 space-y-1.5 text-xs text-[#F5F7FA]/90">
                   {selectedMatchId === 'm-mcs-captains' ? (
                     <>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 justify-center lg:justify-start">
                         <span className="text-[#C6FF00] font-mono">18&apos;</span>
-                        <span className="font-bold">Abrar</span>
-                        <span className="text-amber-300 text-[11px] font-semibold">(Clinical Strike • Assist: Tsukioynx)</span>
+                        <span className="font-bold">Abrar (Captain)</span>
+                        <span className="text-amber-300 text-[11px] font-semibold">(Clinical Solo Strike • 0-1)</span>
                       </div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 justify-center lg:justify-start">
                         <span className="text-[#C6FF00] font-mono">64&apos;</span>
                         <span className="font-bold">Usman</span>
                         <span className="text-emerald-300 text-[11px] font-semibold">(Thunderbolt Volley! • Assist: Abrar)</span>
                       </div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 justify-center lg:justify-start">
                         <span className="text-[#C6FF00] font-mono">76&apos;</span>
                         <span className="font-bold">Zohaib</span>
-                        <span className="text-cyan-300 text-[11px] font-semibold">(Towering Bullet Header! • Assist: Tsukioynx)</span>
+                        <span className="text-cyan-300 text-[11px] font-semibold">(Towering Bullet Header! • Assist: Abrar)</span>
                       </div>
                     </>
                   ) : (
                     <>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 justify-center lg:justify-start">
                         <span className="text-[#C6FF00] font-mono">14&apos;</span>
                         <span className="font-bold">Aliyan</span>
                         <span className="text-emerald-300 text-[11px] font-semibold">(Spectacular Volley!)</span>
                       </div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 justify-center lg:justify-start">
                         <span className="text-[#C6FF00] font-mono">51&apos;</span>
                         <span className="font-bold">Sheryar</span>
                         <span className="text-amber-300 text-[11px] font-semibold">(Direct Free-Kick Golazo!)</span>
                       </div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 justify-center lg:justify-start">
                         <span className="text-[#C6FF00] font-mono">86&apos;</span>
                         <span className="font-bold">Savaiz</span>
                         <span className="text-rose-300 text-[11px] font-semibold">(Tap-In • Rush in the D)</span>
@@ -768,7 +750,7 @@ export const MatchCenterView: React.FC = () => {
                   {selectedMatchId === 'm-mcs-captains' ? 'MCS Captains 48% POSSESSION' : 'Blue Lock FC 64% POSSESSION'}
                 </span>
                 <span className="text-[#929BA9]">
-                  {selectedMatchId === 'm-mcs-captains' ? '9 BIG CHANCES CREATED BY TSUKIOYNX' : 'BALL POSSESSION METRIC'}
+                  {selectedMatchId === 'm-mcs-captains' ? '9 BIG CHANCES CREATED BY CAPTAIN ABRAR' : 'BALL POSSESSION METRIC'}
                 </span>
                 <span className="text-[#C6FF00]">
                   {selectedMatchId === 'm-mcs-captains' ? '52% Coach FC' : '36% Coach FC'}
@@ -796,12 +778,12 @@ export const MatchCenterView: React.FC = () => {
                   {selectedMatchId === 'm-mcs-captains' ? (
                     <>
                       <strong className="text-[#F5F7FA]">Match Breakdown (Wednesday Showcase): </strong>
-                      An electric 6-goal duel! Coach FC captain <strong>Tsukioynx was the undisputed Master of the Pitch</strong>, crafting an incredible <strong>9 BIG CHANCES CREATED</strong> and 2 pinpoint assists. <strong>Abrar</strong> produced a clutch masterclass with 1 goal and 1 assist, while <strong>Usman</strong> rocketed home an unstoppable volley and <strong>Zohaib</strong> powered in a set-piece bullet header. In defense, <strong>Zohaib and Huzaifa struggled under MCS pressure</strong>, though Huzaifa proved defensively much better in positioning and ground reading. <strong>Aliyan</strong> maintained his standing as Coach FC’s clean sheet leader (16 CS), <strong>Jamshaid</strong> gave an uncompromising shift in the full kit (#2), while keeper <strong>Hamza</strong> made 8 crucial saves to preserve the draw despite an accidental back-heel own goal under heavy traffic.
+                      An electric 6-goal duel! Coach FC captain <strong>Abrar was the undisputed Master of the Pitch</strong>, crafting an incredible <strong>9 BIG CHANCES CREATED</strong>, 1 goal, and 2 pinpoint assists. <strong>Usman</strong> rocketed home an unstoppable volley, and <strong>Zohaib</strong> powered in a set-piece bullet header off Abrar’s pinpoint delivery. In defense, <strong>Zohaib and Huzaifa struggled under MCS pressure</strong>, though Huzaifa proved defensively much better in positioning and ground reading. <strong>Aliyan</strong> maintained his standing as Coach FC’s clean sheet leader (16 CS), <strong>Jamshaid</strong> gave an uncompromising shift in the full kit (#2), while keeper <strong>Hamza</strong> made 8 crucial saves to preserve the draw despite an accidental back-heel own goal under heavy traffic.
                     </>
                   ) : (
                     <>
                       <strong className="text-[#F5F7FA]">Match Breakdown: </strong>
-                      Blue Lock FC held supreme control with 64% possession. <strong>Tsukioynx</strong> was unplayable, scoring a solo power shot from midfield after cutting past defenders, providing <strong>2 clear assists</strong>, and creating <strong>3 big chances</strong>. <strong>Faheem</strong> scored by dodging cleanly past both defender and goalkeeper Hamza, while creating 2 chances. <strong>Dilshad</strong> struck twice including a keeper dodge goal. For Coach FC, <strong>Aliyan</strong> had a brilliant game scoring a stunning volley, <strong>Sheryar</strong> scored a direct free-kick, and <strong>Savaiz</strong> converted a tap-in amidst heavy traffic in the D despite missing earlier opportunities.
+                      Blue Lock FC held supreme control with 64% possession. <strong>Abrar</strong> was unplayable, scoring a solo power shot from midfield after cutting past defenders, providing <strong>2 clear assists</strong>, and creating <strong>3 big chances</strong>. <strong>Faheem</strong> scored by dodging cleanly past both defender and goalkeeper Hamza, while creating 2 chances. <strong>Dilshad</strong> struck twice including a keeper dodge goal. For Coach FC, <strong>Aliyan</strong> had a brilliant game scoring a stunning volley, <strong>Sheryar</strong> scored a direct free-kick, and <strong>Savaiz</strong> converted a tap-in amidst heavy traffic in the D despite missing earlier opportunities.
                     </>
                   )}
                 </p>
@@ -864,80 +846,82 @@ export const MatchCenterView: React.FC = () => {
           </div>
 
           {/* TAB CONTROLS */}
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mt-10">
-            <button
-              onClick={() => setActiveTab('derby-history')}
-              className={`px-6 py-3 rounded-xl font-bold text-sm transition-all duration-200 flex items-center gap-2 ${
-                activeTab === 'derby-history'
-                  ? 'bg-[#C6FF00] text-[#080B12] shadow-[0_0_25px_rgba(198,255,0,0.4)]'
-                  : 'bg-[#171F2C] text-[#929BA9] hover:text-[#F5F7FA] border border-[#283141]'
-              }`}
-            >
-              <Trophy className="w-4 h-4" />
-              Derby H2H Series (6 Matches)
-            </button>
-            <button
-              onClick={() => setActiveTab('ratings')}
-              className={`px-6 py-3 rounded-xl font-bold text-sm transition-all duration-200 flex items-center gap-2 ${
-                activeTab === 'ratings'
-                  ? 'bg-[#C6FF00] text-[#080B12] shadow-[0_0_25px_rgba(198,255,0,0.4)]'
-                  : 'bg-[#171F2C] text-[#929BA9] hover:text-[#F5F7FA] border border-[#283141]'
-              }`}
-            >
-              <Award className="w-4 h-4" />
-              {selectedMatchId === 'm-mcs-captains' ? 'Official Player Ratings (Wed 21 Oct)' : 'Official Player Ratings (14 Oct)'}
-            </button>
-            <Link
-              href="/cards"
-              className="px-6 py-3 rounded-xl font-bold text-sm transition-all duration-200 flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:scale-105 shadow-[0_0_20px_rgba(37,99,235,0.4)]"
-            >
-              <Sparkles className="w-4 h-4 text-amber-300" />
-              <span>Ultimate FUT Cards (0-99 Ratings)</span>
-            </Link>
-            <button
-              onClick={() => setActiveTab('timeline')}
-              className={`px-6 py-3 rounded-xl font-bold text-sm transition-all duration-200 flex items-center gap-2 ${
-                activeTab === 'timeline'
-                  ? 'bg-[#C6FF00] text-[#080B12] shadow-[0_0_25px_rgba(198,255,0,0.4)]'
-                  : 'bg-[#171F2C] text-[#929BA9] hover:text-[#F5F7FA] border border-[#283141]'
-              }`}
-            >
-              <Clock className="w-4 h-4" />
-              {selectedMatchId === 'm-mcs-captains' ? '21 Oct Goals & Timeline (3-3)' : '14 Oct Goals & Timeline (4-3)'}
-            </button>
-            <button
-              onClick={() => setActiveTab('lineups')}
-              className={`px-6 py-3 rounded-xl font-bold text-sm transition-all duration-200 flex items-center gap-2 ${
-                activeTab === 'lineups'
-                  ? 'bg-[#C6FF00] text-[#080B12] shadow-[0_0_25px_rgba(198,255,0,0.4)]'
-                  : 'bg-[#171F2C] text-[#929BA9] hover:text-[#F5F7FA] border border-[#283141]'
-              }`}
-            >
-              <Users className="w-4 h-4" />
-              {selectedMatchId === 'm-mcs-captains' ? 'Confirmed Lineups (vs MCS)' : 'Confirmed Team Lineups & Subs (14 Oct)'}
-            </button>
-            <button
-              onClick={() => setActiveTab('stats')}
-              className={`px-6 py-3 rounded-xl font-bold text-sm transition-all duration-200 flex items-center gap-2 ${
-                activeTab === 'stats'
-                  ? 'bg-[#C6FF00] text-[#080B12] shadow-[0_0_25px_rgba(198,255,0,0.4)]'
-                  : 'bg-[#171F2C] text-[#929BA9] hover:text-[#F5F7FA] border border-[#283141]'
-              }`}
-            >
-              <TrendingUp className="w-4 h-4" />
-              Possession & Performance Telemetry
-            </button>
-            <button
-              onClick={() => setActiveTab('gallery')}
-              className={`px-6 py-3 rounded-xl font-bold text-sm transition-all duration-200 flex items-center gap-2 ${
-                activeTab === 'gallery'
-                  ? 'bg-[#C6FF00] text-[#080B12] shadow-[0_0_25px_rgba(198,255,0,0.4)]'
-                  : 'bg-[#171F2C] text-[#929BA9] hover:text-[#F5F7FA] border border-[#283141]'
-              }`}
-            >
-              <Camera className="w-4 h-4" />
-              Match Night & Club Gallery
-            </button>
+          <div className="w-full mt-8 overflow-x-auto pb-3 pt-1">
+            <div className="flex items-center justify-start lg:justify-center gap-2 sm:gap-3 min-w-max px-2">
+              <button
+                onClick={() => setActiveTab('derby-history')}
+                className={`px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition-all duration-200 flex items-center gap-2 shrink-0 ${
+                  activeTab === 'derby-history'
+                    ? 'bg-[#C6FF00] text-[#080B12] shadow-[0_0_25px_rgba(198,255,0,0.4)]'
+                    : 'bg-[#171F2C] text-[#929BA9] hover:text-[#F5F7FA] border border-[#283141]'
+                }`}
+              >
+                <Trophy className="w-4 h-4 shrink-0" />
+                Derby H2H (6 Matches)
+              </button>
+              <button
+                onClick={() => setActiveTab('ratings')}
+                className={`px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition-all duration-200 flex items-center gap-2 shrink-0 ${
+                  activeTab === 'ratings'
+                    ? 'bg-[#C6FF00] text-[#080B12] shadow-[0_0_25px_rgba(198,255,0,0.4)]'
+                    : 'bg-[#171F2C] text-[#929BA9] hover:text-[#F5F7FA] border border-[#283141]'
+                }`}
+              >
+                <Award className="w-4 h-4 shrink-0" />
+                {selectedMatchId === 'm-mcs-captains' ? 'Player Ratings (Wed 21 Oct)' : 'Player Ratings (14 Oct)'}
+              </button>
+              <Link
+                href="/cards"
+                className="px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition-all duration-200 flex items-center gap-2 shrink-0 bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:scale-105 shadow-[0_0_20px_rgba(37,99,235,0.4)]"
+              >
+                <Sparkles className="w-4 h-4 text-amber-300 shrink-0" />
+                <span>Ultimate FUT Cards</span>
+              </Link>
+              <button
+                onClick={() => setActiveTab('timeline')}
+                className={`px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition-all duration-200 flex items-center gap-2 shrink-0 ${
+                  activeTab === 'timeline'
+                    ? 'bg-[#C6FF00] text-[#080B12] shadow-[0_0_25px_rgba(198,255,0,0.4)]'
+                    : 'bg-[#171F2C] text-[#929BA9] hover:text-[#F5F7FA] border border-[#283141]'
+                }`}
+              >
+                <Clock className="w-4 h-4 shrink-0" />
+                {selectedMatchId === 'm-mcs-captains' ? 'Timeline (3-3)' : 'Timeline (4-3)'}
+              </button>
+              <button
+                onClick={() => setActiveTab('lineups')}
+                className={`px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition-all duration-200 flex items-center gap-2 shrink-0 ${
+                  activeTab === 'lineups'
+                    ? 'bg-[#C6FF00] text-[#080B12] shadow-[0_0_25px_rgba(198,255,0,0.4)]'
+                    : 'bg-[#171F2C] text-[#929BA9] hover:text-[#F5F7FA] border border-[#283141]'
+                }`}
+              >
+                <Users className="w-4 h-4 shrink-0" />
+                {selectedMatchId === 'm-mcs-captains' ? 'Confirmed Lineups' : 'Lineups & Subs'}
+              </button>
+              <button
+                onClick={() => setActiveTab('stats')}
+                className={`px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition-all duration-200 flex items-center gap-2 shrink-0 ${
+                  activeTab === 'stats'
+                    ? 'bg-[#C6FF00] text-[#080B12] shadow-[0_0_25px_rgba(198,255,0,0.4)]'
+                    : 'bg-[#171F2C] text-[#929BA9] hover:text-[#F5F7FA] border border-[#283141]'
+                }`}
+              >
+                <TrendingUp className="w-4 h-4 shrink-0" />
+                Telemetry & Stats
+              </button>
+              <button
+                onClick={() => setActiveTab('gallery')}
+                className={`px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition-all duration-200 flex items-center gap-2 shrink-0 ${
+                  activeTab === 'gallery'
+                    ? 'bg-[#C6FF00] text-[#080B12] shadow-[0_0_25px_rgba(198,255,0,0.4)]'
+                    : 'bg-[#171F2C] text-[#929BA9] hover:text-[#F5F7FA] border border-[#283141]'
+                }`}
+              >
+                <Camera className="w-4 h-4 shrink-0" />
+                Pitch & Club Gallery
+              </button>
+            </div>
           </div>
 
         </div>
@@ -957,8 +941,8 @@ export const MatchCenterView: React.FC = () => {
                 </h3>
                 <p className="text-xs text-[#929BA9] mt-1 font-mono">
                   {selectedMatchId === 'm-mcs-captains'
-                    ? 'Ratings reflect Captain Tsukioynx’s 9 big chances created & 2 assists, Abrar’s 1G+1A, Usman’s volley, Zohaib’s bullet header, Hamza’s 8 crucial saves despite unfortunate back-heel OG, and Huzaifa’s defensive shifts.'
-                    : 'Ratings reflect Tsukioynx’s solo power strike & 2 assists, Faheem’s dodge goal, Aliyan’s volley, Sheryar’s free kick, Dilshad’s brace & misses, and Savaiz’s tap-in & missed chances.'}
+                    ? 'Ratings reflect Captain Abrar’s 9 big chances created, 1 goal & 2 assists, Usman’s volley, Zohaib’s bullet header, Hamza’s 8 crucial saves despite unfortunate back-heel OG, and Huzaifa’s defensive shifts.'
+                    : 'Ratings reflect Abrar’s solo power strike & 2 assists, Faheem’s dodge goal, Aliyan’s volley, Sheryar’s free kick, Dilshad’s brace & misses, and Savaiz’s tap-in & missed chances.'}
                 </p>
               </div>
 
@@ -1037,11 +1021,11 @@ export const MatchCenterView: React.FC = () => {
                       <span className="text-xs font-black text-[#F5F7FA]">0 - 1</span>
                     </div>
                     <h4 className="text-base font-bold text-[#F5F7FA] flex items-center gap-2">
-                      <span>Abrar breaks the deadlock! (Assist: Captain Tsukioynx)</span>
-                      <span className="text-xs font-mono px-2 py-0.5 rounded bg-[#C6FF00]/20 text-[#C6FF00]">CLINICAL FINISH</span>
+                      <span>Captain Abrar breaks the deadlock!</span>
+                      <span className="text-xs font-mono px-2 py-0.5 rounded bg-[#C6FF00]/20 text-[#C6FF00]">CLINICAL SOLO STRIKE</span>
                     </h4>
                     <p className="text-xs text-[#929BA9] mt-1">
-                      Captain Tsukioynx splits the MCS defense with a razor-sharp through ball. Abrar collects with his first touch, cuts past his marker, and rifles a clinical strike into the bottom right corner!
+                      Captain Abrar dances through the MCS midfield, cuts past his marker with exquisite balance, and rifles a clinical strike into the bottom right corner for 0-1!
                     </p>
                   </div>
                 </div>
@@ -1136,11 +1120,11 @@ export const MatchCenterView: React.FC = () => {
                       <span className="text-xs font-black text-[#F5F7FA]">2 - 3</span>
                     </div>
                     <h4 className="text-base font-bold text-[#F5F7FA] flex items-center gap-2">
-                      <span>Zohaib bullet header from Tsukioynx’s cross!</span>
+                      <span>Zohaib bullet header from Abrar’s cross!</span>
                       <span className="text-xs font-mono px-2 py-0.5 rounded bg-cyan-400/20 text-cyan-300">BULLET HEADER</span>
                     </h4>
                     <p className="text-xs text-[#929BA9] mt-1">
-                      Captain Tsukioynx swings in an unplayable set-piece cross right into the corridor of uncertainty. Defender Zohaib leaps high above the MCS defense to direct a powerhouse header into the net!
+                      Captain Abrar swings in an unplayable set-piece cross right into the corridor of uncertainty (his 2nd assist!). Defender Zohaib leaps high above the MCS defense to direct a powerhouse header into the net!
                     </p>
                   </div>
                 </div>
@@ -1236,11 +1220,11 @@ export const MatchCenterView: React.FC = () => {
                     <span className="text-xs font-black text-[#F5F7FA]">1 - 1</span>
                   </div>
                   <h4 className="text-base font-bold text-[#F5F7FA] flex items-center gap-2">
-                    <span>Dilshad clear goal with goalkeeper dodge (Assist: Tsukioynx)</span>
+                    <span>Dilshad clear goal with goalkeeper dodge (Assist: Abrar)</span>
                     <span className="text-xs font-mono px-2 py-0.5 rounded bg-blue-500/20 text-blue-300">GK DODGE</span>
                   </h4>
                   <p className="text-xs text-[#929BA9] mt-1">
-                    Tsukioynx dissects Coach FC&apos;s defense with a visionary through-pass (Assist 1). Dilshad bursts through, executes a clever body dodge around keeper Hamza, and slots smoothly into an empty net!
+                    Abrar dissects Coach FC&apos;s defense with a visionary through-pass (Assist 1). Dilshad bursts through, executes a clever body dodge around keeper Hamza, and slots smoothly into an empty net!
                   </p>
                 </div>
               </div>
@@ -1259,12 +1243,12 @@ export const MatchCenterView: React.FC = () => {
                     Dilshad misses follow-up chance
                   </h4>
                   <p className="text-xs text-[#929BA9] mt-1">
-                    Another clear chance carved open by Tsukioynx, but Dilshad rattles the crossbar from 10 yards.
+                    Another clear chance carved open by Abrar, but Dilshad rattles the crossbar from 10 yards.
                   </p>
                 </div>
               </div>
 
-              {/* 39' TSUKIOYNX SOLO RUN & POWER SHOT */}
+              {/* 39' ABRAR SOLO RUN & POWER SHOT */}
               <div className="relative group">
                 <div className="absolute -left-[35px] sm:-left-[51px] top-1.5 w-7 h-7 rounded-full bg-[#C6FF00] text-[#080B12] flex items-center justify-center font-black text-xs shadow-[0_0_15px_rgba(198,255,0,0.5)]">
                   ⚽
@@ -1275,11 +1259,11 @@ export const MatchCenterView: React.FC = () => {
                     <span className="text-xs font-black text-[#F5F7FA]">2 - 1</span>
                   </div>
                   <h4 className="text-base font-bold text-[#F5F7FA] flex items-center gap-2">
-                    <span>Tsukioynx solo run from midfield & proper power shot!</span>
+                    <span>Abrar solo run from midfield & proper power shot!</span>
                     <span className="text-xs font-mono px-2 py-0.5 rounded bg-[#C6FF00]/20 text-[#C6FF00]">SOLO POWER SHOT</span>
                   </h4>
                   <p className="text-xs text-[#929BA9] mt-1">
-                    Breathtaking solo goal! Tsukioynx receives the ball in midfield, slices directly between two defenders with lightning agility, cuts inside, and unleashes a ferocious, proper power shot that crashes in off the underside of the bar!
+                    Breathtaking solo goal! Abrar receives the ball in midfield, slices directly between two defenders with lightning agility, cuts inside, and unleashes a ferocious, proper power shot that crashes in off the underside of the bar!
                   </p>
                 </div>
               </div>
@@ -1373,11 +1357,11 @@ export const MatchCenterView: React.FC = () => {
                     <span className="text-xs font-black text-[#F5F7FA]">4 - 2</span>
                   </div>
                   <h4 className="text-base font-bold text-[#F5F7FA] flex items-center gap-2">
-                    <span>Dilshad bags brace (Assist: Tsukioynx)</span>
-                    <span className="text-xs font-mono px-2 py-0.5 rounded bg-blue-500/20 text-blue-300">2ND ASSIST TSUKIOYNX</span>
+                    <span>Dilshad bags brace (Assist: Abrar)</span>
+                    <span className="text-xs font-mono px-2 py-0.5 rounded bg-blue-500/20 text-blue-300">2ND ASSIST ABRAR</span>
                   </h4>
                   <p className="text-xs text-[#929BA9] mt-1">
-                    Tsukioynx registers his second clear assist of the night with another laser-guided pass through the lines. Dilshad controls cleanly and finishes with authority for 4-2!
+                    Abrar registers his second clear assist of the night with another laser-guided pass through the lines. Dilshad controls cleanly and finishes with authority for 4-2!
                   </p>
                 </div>
               </div>
@@ -1505,16 +1489,16 @@ export const MatchCenterView: React.FC = () => {
                       <span className="font-mono text-emerald-400 font-black">DEF • 8.1</span>
                     </div>
                     <div className="p-3 rounded-xl bg-[#C6FF00]/15 border border-[#C6FF00] flex items-center justify-between font-bold text-[#F5F7FA] shadow-[0_0_15px_rgba(198,255,0,0.2)]">
-                      <span>Tsukioynx (Captain • 9 Big Chances Created • 2 Assists)</span>
-                      <span className="font-mono text-[#C6FF00] font-black">MID • 9.7 ⭐</span>
+                      <span>Abrar (Captain • 9 Big Chances Created • 1 Goal & 2 Assists)</span>
+                      <span className="font-mono text-[#C6FF00] font-black">MID • 9.8 ⭐</span>
                     </div>
                     <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between font-bold text-[#F5F7FA]">
                       <span>Usman (Midfielder • 64&apos; Thunderbolt Volley)</span>
                       <span className="font-mono text-emerald-400 font-black">MID • 8.6</span>
                     </div>
                     <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between font-bold text-[#F5F7FA]">
-                      <span>Abrar (Forward • 18&apos; Goal + Laser Cross Assist)</span>
-                      <span className="font-mono text-amber-300 font-black">FWD • 9.1</span>
+                      <span>Savaiz (Forward • Attacking Threat)</span>
+                      <span className="font-mono text-amber-300 font-black">FWD • 7.3</span>
                     </div>
                   </div>
                 </div>
@@ -1553,7 +1537,7 @@ export const MatchCenterView: React.FC = () => {
                       <span className="font-mono text-cyan-300 font-black">MID • 8.8</span>
                     </div>
                     <div className="p-3 rounded-xl bg-[#C6FF00]/10 border border-[#C6FF00]/40 flex items-center justify-between font-bold text-[#F5F7FA]">
-                      <span>Tsukioynx (Midfield • Solo Power Shot + 2 Assists + 3 Ch)</span>
+                      <span>Abrar (Midfield • Solo Power Shot + 2 Assists + 3 Ch)</span>
                       <span className="font-mono text-[#C6FF00] font-black">MID • 9.5</span>
                     </div>
                     <div className="p-3 rounded-xl bg-[#080B12] flex items-center justify-between">
@@ -1815,7 +1799,7 @@ export const MatchCenterView: React.FC = () => {
                     8 October 2026: Coach FC 5 — 6 Blue Lock FC
                   </h4>
                   <p className="text-xs text-[#929BA9] mt-1 font-mono">
-                    The 11-goal slugfest • Usman brace & assist, Tsukioynx goal & 2 assists, Dilshad brace, Husnain brace
+                    The 11-goal slugfest • Usman brace & assist, Abrar goal & 2 assists, Dilshad brace, Husnain brace
                   </p>
                 </div>
 
@@ -1844,7 +1828,7 @@ export const MatchCenterView: React.FC = () => {
                     <div className="p-3 rounded-xl bg-[#171F2C] border border-[#283141] flex items-start justify-between">
                       <div>
                         <span className="font-bold text-[#F5F7FA] text-sm">Dilshad</span>
-                        <p className="text-[#929BA9] text-[11px] mt-0.5">Scored 2 goals (41&apos;, 89&apos; match-winning strike off Tsukioynx assist)</p>
+                        <p className="text-[#929BA9] text-[11px] mt-0.5">Scored 2 goals (41&apos;, 89&apos; match-winning strike off Abrar assist)</p>
                       </div>
                       <span className="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono font-bold shrink-0">
                         2 Goals
@@ -1853,7 +1837,7 @@ export const MatchCenterView: React.FC = () => {
 
                     <div className="p-3 rounded-xl bg-[#171F2C] border border-[#283141] flex items-start justify-between">
                       <div>
-                        <span className="font-bold text-[#F5F7FA] text-sm">Tsukioynx</span>
+                        <span className="font-bold text-[#F5F7FA] text-sm">Abrar</span>
                         <p className="text-[#929BA9] text-[11px] mt-0.5">Scored 1 goal (24&apos;) + 2 clear assists (for Hammad 9&apos; and Dilshad 89&apos;)</p>
                       </div>
                       <span className="px-2 py-0.5 rounded bg-[#C6FF00]/20 text-[#C6FF00] font-mono font-bold shrink-0">
@@ -1864,7 +1848,7 @@ export const MatchCenterView: React.FC = () => {
                     <div className="p-3 rounded-xl bg-[#171F2C] border border-[#283141] flex items-start justify-between">
                       <div>
                         <span className="font-bold text-[#F5F7FA] text-sm">Hammad</span>
-                        <p className="text-[#929BA9] text-[11px] mt-0.5">Scored 1 goal (9&apos; opening strike for Blue Lock off Tsukioynx assist)</p>
+                        <p className="text-[#929BA9] text-[11px] mt-0.5">Scored 1 goal (9&apos; opening strike for Blue Lock off Abrar assist)</p>
                       </div>
                       <span className="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono font-bold shrink-0">
                         1 Goal
@@ -1960,7 +1944,7 @@ export const MatchCenterView: React.FC = () => {
               {/* Match Narrative Summary */}
               <div className="mt-6 p-4 rounded-2xl bg-[#080B12] border border-[#283141] text-xs leading-relaxed text-[#929BA9]">
                 <strong className="text-[#F5F7FA]">8th October Tactical Review: </strong>
-                An explosive 11-goal classic! Blue Lock took an early lead through <strong>Hammad</strong> (assisted by <strong>Tsukioynx</strong>), before <strong>Usman</strong> (2 goals, 1 assist for Coach FC) and <strong>Husnain</strong> (2 goals for Coach FC) answered back heroically alongside a goal from <strong>Aliyan</strong>. For Blue Lock, <strong>Dilshad</strong> struck twice (including the 89th-minute winner off Tsukioynx&apos;s 2nd assist), with <strong>Tsukioynx</strong>, <strong>Faheem</strong>, and <strong>Zohaib</strong> also on the scoresheet to seal a breathless 5-6 victory for Blue Lock FC.
+                An explosive 11-goal classic! Blue Lock took an early lead through <strong>Hammad</strong> (assisted by <strong>Abrar</strong>), before <strong>Usman</strong> (2 goals, 1 assist for Coach FC) and <strong>Husnain</strong> (2 goals for Coach FC) answered back heroically alongside a goal from <strong>Aliyan</strong>. For Blue Lock, <strong>Dilshad</strong> struck twice (including the 89th-minute winner off Abrar&apos;s 2nd assist), with <strong>Abrar</strong>, <strong>Faheem</strong>, and <strong>Zohaib</strong> also on the scoresheet to seal a breathless 5-6 victory for Blue Lock FC.
               </div>
 
             </div>
@@ -1975,7 +1959,9 @@ export const MatchCenterView: React.FC = () => {
                 Tactical Telemetry & Match Statistics
               </h3>
               <p className="text-xs text-[#929BA9] mt-1 font-mono">
-                Blue Lock FC’s high possession strategy vs. Coach FC’s counter-attacking resistance.
+                {selectedMatchId === 'm-mcs-captains'
+                  ? 'MCS Captains high-press battle vs. Coach FC’s masterclass orchestrated by Captain Abrar (9 Big Chances Created).'
+                  : 'Blue Lock FC’s high possession strategy vs. Coach FC’s counter-attacking resistance.'}
               </p>
             </div>
 
@@ -1985,78 +1971,140 @@ export const MatchCenterView: React.FC = () => {
               {/* Possession */}
               <div>
                 <div className="flex justify-between text-xs font-mono font-bold mb-2">
-                  <span className="text-blue-400">Blue Lock FC 64%</span>
+                  <span className={selectedMatchId === 'm-mcs-captains' ? 'text-amber-400' : 'text-blue-400'}>
+                    {selectedMatchId === 'm-mcs-captains' ? 'MCS Captains 48%' : 'Blue Lock FC 64%'}
+                  </span>
                   <span className="text-[#929BA9]">Ball Possession</span>
-                  <span className="text-[#C6FF00]">Coach FC 36%</span>
+                  <span className="text-[#C6FF00]">
+                    {selectedMatchId === 'm-mcs-captains' ? 'Coach FC 52%' : 'Coach FC 36%'}
+                  </span>
                 </div>
                 <div className="w-full h-3 bg-[#080B12] rounded-full overflow-hidden flex border border-[#283141]">
-                  <div className="h-full bg-blue-500" style={{ width: '64%' }} />
-                  <div className="h-full bg-[#C6FF00]" style={{ width: '36%' }} />
+                  <div 
+                    className={selectedMatchId === 'm-mcs-captains' ? 'h-full bg-amber-500' : 'h-full bg-blue-500'} 
+                    style={{ width: selectedMatchId === 'm-mcs-captains' ? '48%' : '64%' }} 
+                  />
+                  <div 
+                    className="h-full bg-[#C6FF00]" 
+                    style={{ width: selectedMatchId === 'm-mcs-captains' ? '52%' : '36%' }} 
+                  />
                 </div>
               </div>
 
               {/* Chances Created */}
               <div>
                 <div className="flex justify-between text-xs font-mono font-bold mb-2">
-                  <span className="text-blue-400">5 Chances Created (Tsukioynx 3, Faheem 2)</span>
+                  <span className={selectedMatchId === 'm-mcs-captains' ? 'text-amber-400' : 'text-blue-400'}>
+                    {selectedMatchId === 'm-mcs-captains' ? '4 Chances Created' : '5 Chances Created (Abrar 3, Faheem 2)'}
+                  </span>
                   <span className="text-[#929BA9]">Key Chances Created</span>
-                  <span className="text-[#C6FF00]">2 Chances Created</span>
+                  <span className="text-[#C6FF00]">
+                    {selectedMatchId === 'm-mcs-captains' ? '11 Created (Captain Abrar 9 ⭐)' : '2 Chances Created'}
+                  </span>
                 </div>
                 <div className="w-full h-3 bg-[#080B12] rounded-full overflow-hidden flex border border-[#283141]">
-                  <div className="h-full bg-blue-500" style={{ width: '71%' }} />
-                  <div className="h-full bg-[#C6FF00]" style={{ width: '29%' }} />
+                  <div 
+                    className={selectedMatchId === 'm-mcs-captains' ? 'h-full bg-amber-500' : 'h-full bg-blue-500'} 
+                    style={{ width: selectedMatchId === 'm-mcs-captains' ? '27%' : '71%' }} 
+                  />
+                  <div 
+                    className="h-full bg-[#C6FF00]" 
+                    style={{ width: selectedMatchId === 'm-mcs-captains' ? '73%' : '29%' }} 
+                  />
                 </div>
               </div>
 
               {/* Shots on Target */}
               <div>
                 <div className="flex justify-between text-xs font-mono font-bold mb-2">
-                  <span className="text-blue-400">12 (22 total)</span>
+                  <span className={selectedMatchId === 'm-mcs-captains' ? 'text-amber-400' : 'text-blue-400'}>
+                    {selectedMatchId === 'm-mcs-captains' ? '9 (16 total)' : '12 (22 total)'}
+                  </span>
                   <span className="text-[#929BA9]">Shots on Target (Total Shots)</span>
-                  <span className="text-[#C6FF00]">7 (13 total)</span>
+                  <span className="text-[#C6FF00]">
+                    {selectedMatchId === 'm-mcs-captains' ? '10 (17 total)' : '7 (13 total)'}
+                  </span>
                 </div>
                 <div className="w-full h-3 bg-[#080B12] rounded-full overflow-hidden flex border border-[#283141]">
-                  <div className="h-full bg-blue-500" style={{ width: '63%' }} />
-                  <div className="h-full bg-[#C6FF00]" style={{ width: '37%' }} />
+                  <div 
+                    className={selectedMatchId === 'm-mcs-captains' ? 'h-full bg-amber-500' : 'h-full bg-blue-500'} 
+                    style={{ width: selectedMatchId === 'm-mcs-captains' ? '47%' : '63%' }} 
+                  />
+                  <div 
+                    className="h-full bg-[#C6FF00]" 
+                    style={{ width: selectedMatchId === 'm-mcs-captains' ? '53%' : '37%' }} 
+                  />
                 </div>
               </div>
 
-              {/* Big Chances Missed */}
+              {/* Goalkeeper Saves */}
               <div>
                 <div className="flex justify-between text-xs font-mono font-bold mb-2">
-                  <span className="text-blue-400">2 Missed (Dilshad x2)</span>
-                  <span className="text-rose-400 font-bold">Big Chances Missed</span>
-                  <span className="text-[#C6FF00]">3 Missed (Savaiz x3)</span>
+                  <span className={selectedMatchId === 'm-mcs-captains' ? 'text-amber-400' : 'text-blue-400'}>
+                    {selectedMatchId === 'm-mcs-captains' ? 'MCS Keeper: 4 Saves' : '2 Missed (Dilshad x2)'}
+                  </span>
+                  <span className={selectedMatchId === 'm-mcs-captains' ? 'text-cyan-400 font-bold' : 'text-rose-400 font-bold'}>
+                    {selectedMatchId === 'm-mcs-captains' ? 'Goalkeeper Saves' : 'Big Chances Missed'}
+                  </span>
+                  <span className="text-[#C6FF00]">
+                    {selectedMatchId === 'm-mcs-captains' ? 'Hamza: 8 Crucial Saves 🧤' : '3 Missed (Savaiz x3)'}
+                  </span>
                 </div>
                 <div className="w-full h-3 bg-[#080B12] rounded-full overflow-hidden flex border border-[#283141]">
-                  <div className="h-full bg-rose-500/80" style={{ width: '40%' }} />
-                  <div className="h-full bg-rose-500" style={{ width: '60%' }} />
+                  <div 
+                    className={selectedMatchId === 'm-mcs-captains' ? 'h-full bg-amber-500/80' : 'h-full bg-rose-500/80'} 
+                    style={{ width: selectedMatchId === 'm-mcs-captains' ? '33%' : '40%' }} 
+                  />
+                  <div 
+                    className={selectedMatchId === 'm-mcs-captains' ? 'h-full bg-cyan-400' : 'h-full bg-rose-500'} 
+                    style={{ width: selectedMatchId === 'm-mcs-captains' ? '67%' : '60%' }} 
+                  />
                 </div>
               </div>
 
               {/* Passes Completed */}
               <div>
                 <div className="flex justify-between text-xs font-mono font-bold mb-2">
-                  <span className="text-blue-400">642 passes (92% acc)</span>
+                  <span className={selectedMatchId === 'm-mcs-captains' ? 'text-amber-400' : 'text-blue-400'}>
+                    {selectedMatchId === 'm-mcs-captains' ? '384 passes (84% acc)' : '642 passes (92% acc)'}
+                  </span>
                   <span className="text-[#929BA9]">Passes Completed</span>
-                  <span className="text-[#C6FF00]">318 passes (80% acc)</span>
+                  <span className="text-[#C6FF00]">
+                    {selectedMatchId === 'm-mcs-captains' ? '426 passes (89% acc)' : '318 passes (80% acc)'}
+                  </span>
                 </div>
                 <div className="w-full h-3 bg-[#080B12] rounded-full overflow-hidden flex border border-[#283141]">
-                  <div className="h-full bg-blue-500" style={{ width: '67%' }} />
-                  <div className="h-full bg-[#C6FF00]" style={{ width: '33%' }} />
+                  <div 
+                    className={selectedMatchId === 'm-mcs-captains' ? 'h-full bg-amber-500' : 'h-full bg-blue-500'} 
+                    style={{ width: selectedMatchId === 'm-mcs-captains' ? '47%' : '67%' }} 
+                  />
+                  <div 
+                    className="h-full bg-[#C6FF00]" 
+                    style={{ width: selectedMatchId === 'm-mcs-captains' ? '53%' : '33%' }} 
+                  />
                 </div>
               </div>
 
               {/* Tackles & Defensive Duels */}
               <div>
                 <div className="flex justify-between text-xs font-mono font-bold mb-2">
-                  <span className="text-blue-400">16 Tackles Won</span>
+                  <span className={selectedMatchId === 'm-mcs-captains' ? 'text-amber-400' : 'text-blue-400'}>
+                    {selectedMatchId === 'm-mcs-captains' ? '19 Tackles Won' : '16 Tackles Won'}
+                  </span>
                   <span className="text-[#929BA9]">Tackles & Duels Won</span>
-                  <span className="text-[#C6FF00]">26 Tackles Won (Aliyan 6)</span>
+                  <span className="text-[#C6FF00]">
+                    {selectedMatchId === 'm-mcs-captains' ? '24 Tackles Won (Huzaifa 5, Jamshaid 4)' : '26 Tackles Won (Aliyan 6)'}
+                  </span>
                 </div>
                 <div className="w-full h-3 bg-[#080B12] rounded-full overflow-hidden flex border border-[#283141]">
-                  <div className="h-full bg-blue-500" style={{ width: '38%' }} />
-                  <div className="h-full bg-[#C6FF00]" style={{ width: '62%' }} />
+                  <div 
+                    className={selectedMatchId === 'm-mcs-captains' ? 'h-full bg-amber-500' : 'h-full bg-blue-500'} 
+                    style={{ width: selectedMatchId === 'm-mcs-captains' ? '44%' : '38%' }} 
+                  />
+                  <div 
+                    className="h-full bg-[#C6FF00]" 
+                    style={{ width: selectedMatchId === 'm-mcs-captains' ? '56%' : '62%' }} 
+                  />
                 </div>
               </div>
 
@@ -2134,15 +2182,15 @@ export const MatchCenterView: React.FC = () => {
               </div>
             </div>
 
-            {/* Tsukioynx On-Pitch Action Gallery (Front, Backside with Name, Side Action, Strike & Ball Hold) */}
+            {/* Abrar On-Pitch Action Gallery (Front, Backside with Name, Side Action, Strike & Ball Hold) */}
             <div className="pt-8 border-t border-[#283141] space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
                   <span className="text-xs font-mono text-blue-400 font-bold uppercase tracking-wider block">
-                    Samurai Blue #8 Match Focus
+                    Captain #8 Match Focus
                   </span>
                   <h4 className="text-2xl font-black text-[#F5F7FA] mt-0.5">
-                    Tsukioynx On-The-Field Match Action Gallery
+                    Abrar (Captain #8) On-The-Field Match Action Gallery
                   </h4>
                   <p className="text-xs text-[#929BA9] font-mono">
                     Official on-pitch photo series: Front stance with ball, jersey back with name &amp; #8, side-sprint, mid-air volley, and match ball focus.
@@ -2159,7 +2207,7 @@ export const MatchCenterView: React.FC = () => {
                   <div className="relative h-72 sm:h-80 overflow-hidden bg-[#080B12]">
                     <img
                       src="/players/tsukioynx-japan-front.jpg"
-                      alt="Tsukioynx Front Stance with Ball"
+                      alt="Abrar Front Stance with Ball"
                       className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     />
                     <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-[#080B12]/80 backdrop-blur-md border border-[#283141] text-[10px] font-mono font-bold text-blue-300">
@@ -2168,7 +2216,7 @@ export const MatchCenterView: React.FC = () => {
                   </div>
                   <div className="p-4">
                     <h5 className="font-bold text-sm text-[#F5F7FA]">Front Stance with Match Ball</h5>
-                    <p className="text-[11px] text-[#929BA9] mt-1">Poised on the pitch in the iconic Japan Samurai Blue kit, foot resting on the ball.</p>
+                    <p className="text-[11px] text-[#929BA9] mt-1">Poised on the pitch in the iconic kit, foot resting on the ball with playmaker poise.</p>
                   </div>
                 </div>
 
@@ -2177,16 +2225,16 @@ export const MatchCenterView: React.FC = () => {
                   <div className="relative h-72 sm:h-80 overflow-hidden bg-[#080B12]">
                     <img
                       src="/players/tsukioynx-japan-back.jpg"
-                      alt="Tsukioynx Jersey Back with Name and #8"
+                      alt="Abrar Jersey Back with Name and #8"
                       className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     />
                     <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-[#080B12]/80 backdrop-blur-md border border-[#283141] text-[10px] font-mono font-bold text-yellow-300">
-                      👕 Back • TSUKIOYNX #8
+                      👕 Back • ABRAR #8
                     </span>
                   </div>
                   <div className="p-4">
                     <h5 className="font-bold text-sm text-[#F5F7FA]">Jersey Backside with Name</h5>
-                    <p className="text-[11px] text-[#929BA9] mt-1">Looking back over the shoulder with &apos;TSUKIOYNX&apos; lettering and gold #8 displayed.</p>
+                    <p className="text-[11px] text-[#929BA9] mt-1">Looking back over the shoulder with &apos;ABRAR #8&apos; edition and iconic gold number displayed.</p>
                   </div>
                 </div>
 
@@ -2195,7 +2243,7 @@ export const MatchCenterView: React.FC = () => {
                   <div className="relative h-72 sm:h-80 overflow-hidden bg-[#080B12]">
                     <img
                       src="/players/tsukioynx-japan-side.jpg"
-                      alt="Tsukioynx Side Angle Sprint"
+                      alt="Abrar Side Angle Sprint"
                       className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     />
                     <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-[#080B12]/80 backdrop-blur-md border border-[#283141] text-[10px] font-mono font-bold text-cyan-300">
@@ -2204,7 +2252,7 @@ export const MatchCenterView: React.FC = () => {
                   </div>
                   <div className="p-4">
                     <h5 className="font-bold text-sm text-[#F5F7FA]">Side Profile Dribbling Run</h5>
-                    <p className="text-[11px] text-[#929BA9] mt-1">Explosive sprint cutting across the midfield line before unlocking the defense.</p>
+                    <p className="text-[11px] text-[#929BA9] mt-1">Explosive sprint cutting across the midfield line before unlocking the defense with 9 big chances.</p>
                   </div>
                 </div>
 
@@ -2213,7 +2261,7 @@ export const MatchCenterView: React.FC = () => {
                   <div className="relative h-72 sm:h-80 overflow-hidden bg-[#080B12]">
                     <img
                       src="/players/tsukioynx-japan-strike.jpg"
-                      alt="Tsukioynx Mid-Air Strike"
+                      alt="Abrar Mid-Air Strike"
                       className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     />
                     <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-[#080B12]/80 backdrop-blur-md border border-[#283141] text-[10px] font-mono font-bold text-rose-300">
@@ -2231,7 +2279,7 @@ export const MatchCenterView: React.FC = () => {
                   <div className="relative h-72 sm:h-80 overflow-hidden bg-[#080B12]">
                     <img
                       src="/players/tsukioynx-japan-holdball.jpg"
-                      alt="Tsukioynx Holding Ball"
+                      alt="Abrar Holding Ball"
                       className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     />
                     <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-[#080B12]/80 backdrop-blur-md border border-[#283141] text-[10px] font-mono font-bold text-[#C6FF00]">
@@ -2240,7 +2288,7 @@ export const MatchCenterView: React.FC = () => {
                   </div>
                   <div className="p-4">
                     <h5 className="font-bold text-sm text-[#F5F7FA]">Match Ball Under Arm</h5>
-                    <p className="text-[11px] text-[#929BA9] mt-1">Post-match reflection as Super Man of the Match with the official match ball.</p>
+                    <p className="text-[11px] text-[#929BA9] mt-1">Post-match reflection as Super Man of the Match and Playmaker Maestro with the match ball.</p>
                   </div>
                 </div>
               </div>
@@ -2271,20 +2319,20 @@ export const MatchCenterView: React.FC = () => {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-                {/* Tsukioynx Full-Kit */}
+                {/* Abrar Full-Kit */}
                 <div className="group bg-[#171F2C] border border-[#283141] hover:border-blue-400/50 rounded-2xl overflow-hidden transition-all flex flex-col justify-between">
                   <div className="relative h-80 overflow-hidden bg-[#080B12]">
                     <img
                       src="/players/tsukioynx-fullkit.jpg"
-                      alt="Tsukioynx Full Kit with Cleats"
+                      alt="Abrar Full Kit with Cleats"
                       className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     />
                     <span className="absolute top-3 left-3 px-2 py-0.5 rounded bg-blue-500/80 backdrop-blur text-[10px] font-bold text-white uppercase">
-                      Tsukioynx #8
+                      Abrar #8
                     </span>
                   </div>
                   <div className="p-3 text-center">
-                    <h5 className="font-bold text-xs text-[#F5F7FA]">Tsukioynx</h5>
+                    <h5 className="font-bold text-xs text-[#F5F7FA]">Abrar (Captain)</h5>
                     <p className="text-[10px] text-blue-400 font-mono mt-0.5">Studio Media Day • Boots & Cleats</p>
                   </div>
                 </div>
