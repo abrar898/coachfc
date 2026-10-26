@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { 
   Trophy, 
@@ -21,14 +21,29 @@ import {
   Users,
   Zap,
   Target,
-  Camera
+  Camera,
+  Plus,
+  Trash2,
+  Edit3,
+  Sliders,
+  RotateCcw,
+  Lock,
+  Unlock,
+  Save,
+  UserPlus,
+  UserCheck,
+  Check,
+  X,
+  ChevronUp,
+  ChevronDown,
+  ShieldAlert
 } from 'lucide-react';
 import { Crest } from '../Crest';
 import { db } from '@/lib/db';
 import { BlueLockKitStudio } from './BlueLockKitStudio';
 import { StadiumAudioPlayer } from '../media/StadiumAudioPlayer';
 
-interface PlayerRating {
+export interface PlayerRating {
   name: string;
   team: 'Blue Lock FC' | 'Coach FC';
   number: number;
@@ -45,6 +60,10 @@ interface PlayerRating {
   missedChances: number;
   keyStats: string;
   verdict: string;
+  isStarting?: boolean;
+  subMinute?: number;
+  subWith?: string;
+  isKeyPlayer?: boolean;
 }
 
 const PLAYER_RATINGS: PlayerRating[] = [
@@ -240,14 +259,16 @@ export const MCS_CAPTAINS_RATINGS: PlayerRating[] = [
     photoSuitUrl: '/players/tsukioynx-real.jpg',
     photoFullKitUrl: '/players/tsukioynx-coachfc-studio.jpg',
     rating: 9.8,
+    isKeyPlayer: true,
     highlightBadge: '⭐ SUPER KEY PLAYER • 9 BIG CHANCES',
     badgeColor: 'bg-[#C6FF00] text-[#080B12]',
     goals: 1,
-    assists: 2,
+    assists: 1,
     chancesCreated: 9,
     missedChances: 0,
-    keyStats: '1 Goal • 2 Assists • 9 Big Chances Created • 95% Pass Acc',
-    verdict: 'Undisputed Master of the Pitch and Captain’s masterclass! Scored the clinical 18\' opening goal, orchestrated 2 assists (for Usman’s 64\' volley and Zohaib’s 76\' header), and engineered an astonishing 9 BIG CHANCES CREATED.'
+    keyStats: '1 Solo Wonder Goal (18\') • 1 Pinpoint Corner Assist to Zohaib (76\') • 9 Big Chances Created',
+    verdict: 'Undisputed Master of the Pitch and Captain’s masterclass! Sliced open MCS with an 18\' clinical solo wonder strike, engineered an astonishing 9 BIG CHANCES CREATED, and delivered the pinpoint corner assist for Zohaib\'s 76\' bullet header.',
+    isStarting: true
   },
   {
     name: 'Usman',
@@ -257,69 +278,16 @@ export const MCS_CAPTAINS_RATINGS: PlayerRating[] = [
     photoUrl: 'https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=600&q=80',
     photoSuitUrl: 'https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=600&q=80',
     photoFullKitUrl: 'https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=600&q=80',
-    rating: 8.6,
-    highlightBadge: '💥 THUNDERBOLT VOLLEY GOAL',
+    rating: 8.8,
+    highlightBadge: '💥 SOLO THUNDERBOLT GOLAZO',
     badgeColor: 'bg-emerald-400 text-[#080B12]',
     goals: 1,
     assists: 0,
     chancesCreated: 2,
     missedChances: 1,
-    keyStats: '1 Goal (Thunderbolt Volley) • 3 Shots On Target • 88% Pass Acc',
-    verdict: 'High-octane midfield dynamo. Smashed home Abrar’s cross on 64\' with an unstoppable first-time volley into the roof of the net.'
-  },
-  {
-    name: 'Aliyan',
-    team: 'Coach FC',
-    number: 26,
-    position: 'Defender / Fullback',
-    photoUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80',
-    photoSuitUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80',
-    photoFullKitUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80',
-    rating: 7.8,
-    highlightBadge: '🛡️ SQUAD CLEAN SHEET LEADER (16 CS)',
-    badgeColor: 'bg-[#C6FF00]/20 text-[#C6FF00] border border-[#C6FF00]/30',
-    goals: 0,
-    assists: 0,
-    chancesCreated: 1,
-    missedChances: 0,
-    keyStats: '5 Tackles Won • 4 Recoveries • Club Clean Sheet Record Leader (16)',
-    verdict: 'Stood out as the most dependable defender across the backline. Read the play smoothly, showing why he leads Huzaifa and Zohaib in clean sheet stability.'
-  },
-  {
-    name: 'Jamshaid',
-    team: 'Coach FC',
-    number: 2,
-    position: 'Defender / Right Back',
-    photoUrl: '/players/jamshaid-fullkit.jpg',
-    photoSuitUrl: '/players/jamshaid-real.jpg',
-    photoFullKitUrl: '/players/jamshaid-fullkit.jpg',
-    rating: 7.6,
-    highlightBadge: '⚔️ FULL-KIT ENFORCER (#2)',
-    badgeColor: 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30',
-    goals: 0,
-    assists: 0,
-    chancesCreated: 1,
-    missedChances: 0,
-    keyStats: '4 Tackles • 89% Pass Acc • 2 Crucial Interceptions',
-    verdict: 'Resolute shift in the official Coach FC kit with boots on the pitch. Closed down MCS wide overloads and linked effectively with Captain Abrar and the midfield.'
-  },
-  {
-    name: 'Huzaifa',
-    team: 'Coach FC',
-    number: 5,
-    position: 'Central Defender',
-    photoUrl: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=600&q=80',
-    photoSuitUrl: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=600&q=80',
-    photoFullKitUrl: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=600&q=80',
-    rating: 7.2,
-    highlightBadge: '🛡️ SUPERIOR DEFENSIVE DUELS',
-    badgeColor: 'bg-blue-500/20 text-blue-300 border border-blue-500/30',
-    goals: 0,
-    assists: 0,
-    chancesCreated: 0,
-    missedChances: 0,
-    keyStats: '5 Interceptions • 4 Aerial Duels Won • Defensively Superior Prowess',
-    verdict: 'Challenging test under high MCS pressure. Although defensively much better, sharper on ground challenges and positional duels than Zohaib, still endured lapses as MCS struck three times.'
+    keyStats: '1 Solo Thunderbolt Golazo (64\') • Unassisted Wonder Strike • 88% Pass Acc',
+    verdict: 'Sensational solo golazo! Drove past two MCS defenders with blistering pace and power on 64\', unleashing an unstoppable solo thunderbolt into the top corner for 2-2 without needing any assist.',
+    isStarting: true
   },
   {
     name: 'Zohaib',
@@ -336,68 +304,266 @@ export const MCS_CAPTAINS_RATINGS: PlayerRating[] = [
     assists: 0,
     chancesCreated: 0,
     missedChances: 0,
-    keyStats: '1 Aerial Bullet Header Goal • 3 Marking Lapses • 4 Clearances',
-    verdict: 'Magnificent bullet header on 76\' from Captain Abrar’s pinpoint corner to put Coach FC ahead 3-2! However, had severe defensive lapses and lost markers alongside Huzaifa, conceding 3 goals.'
+    keyStats: '1 Aerial Bullet Header Goal (76\') • Assist: Captain Abrar • 3 Marking Lapses',
+    verdict: 'Rose majestically on 76\' to power in Captain Abrar’s pinpoint corner cross for 2-3! However, faced severe defensive struggles and marking lapses under relentless MCS pressure as MCS scored three times.',
+    isStarting: true
   },
   {
-    name: 'Hamza',
+    name: 'Jibran',
     team: 'Coach FC',
-    number: 1,
+    number: 13,
     position: 'Goalkeeper',
-    photoUrl: 'https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=600&q=80',
-    photoSuitUrl: 'https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=600&q=80',
-    photoFullKitUrl: 'https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=600&q=80',
-    rating: 7.0,
-    highlightBadge: '🧤 8 HEROIC CRUCIAL SAVES • ACCIDENTAL OWN GOAL',
-    badgeColor: 'bg-orange-500/20 text-orange-300 border border-orange-500/30',
+    photoUrl: '/players/jibran-real.png',
+    photoSuitUrl: '/players/jibran-real.png',
+    photoFullKitUrl: '/players/jibran-real.png',
+    rating: 7.2,
+    highlightBadge: '🧤 8 CLUTCH SAVES • BACK-HEEL ACCIDENTAL OG',
+    badgeColor: 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30',
     goals: 0,
     assists: 0,
     chancesCreated: 0,
     missedChances: 0,
-    keyStats: '8 Crucial Saves • 1 Accidental Back-Heel Own Goal • 3 1v1 Denials',
-    verdict: 'Dramatic performance. Accidentally turned the ball into his own net with an errant back-heel under pressure, yet redeemed himself with 8 world-class reflex saves to keep Coach FC in the match.'
+    keyStats: '8 Crucial Saves • 1 Accidental Back-Heel Own Goal Under Heavy Pressure (52\')',
+    verdict: 'Stepped in heroically between the sticks as Coach FC\'s goalkeeper in the 8-a-side match! Conceded an unfortunate accidental back-heel clearance own goal on 52\' amidst chaotic traffic, but stood tall with 8 decisive clutch saves to preserve the 3-3 draw.',
+    isStarting: true
+  },
+  {
+    name: 'Huzaifa',
+    team: 'Coach FC',
+    number: 5,
+    position: 'Central Defender',
+    photoUrl: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=600&q=80',
+    photoSuitUrl: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=600&q=80',
+    photoFullKitUrl: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=600&q=80',
+    rating: 7.3,
+    highlightBadge: '🛡️ SUPERIOR DEFENSIVE DUELS',
+    badgeColor: 'bg-blue-500/20 text-blue-300 border border-blue-500/30',
+    goals: 0,
+    assists: 0,
+    chancesCreated: 0,
+    missedChances: 0,
+    keyStats: '5 Ground Challenges Won • 4 Interceptions • Defensively Superior Prowess',
+    verdict: 'Defensively much better and more composed than Zohaib in positioning, tackling, and reading ground plays, maintaining a resolute shield under high MCS pressure.',
+    isStarting: true
+  },
+  {
+    name: 'Aliyan',
+    team: 'Coach FC',
+    number: 26,
+    position: 'Defender / Fullback',
+    photoUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80',
+    photoSuitUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80',
+    photoFullKitUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80',
+    rating: 7.8,
+    highlightBadge: '🛡️ CLEAN SHEET LEADER (16 CS)',
+    badgeColor: 'bg-[#C6FF00]/20 text-[#C6FF00] border border-[#C6FF00]/30',
+    goals: 0,
+    assists: 0,
+    chancesCreated: 1,
+    missedChances: 0,
+    keyStats: '5 Tackles Won • 4 Recoveries • Club Clean Sheet Record Leader (16 CS)',
+    verdict: 'Most dependable defender across the backline. Maintained defensive discipline along the flank and proved why he leads Huzaifa and Zohaib in clean sheet stability.',
+    isStarting: true
+  },
+  {
+    name: 'Faheem',
+    team: 'Coach FC',
+    number: 6,
+    position: 'Midfield / Playmaker',
+    photoUrl: '/players/faheem-real.jpg',
+    photoSuitUrl: '/players/faheem-real.jpg',
+    photoFullKitUrl: '/players/faheem-real.jpg',
+    rating: 7.6,
+    highlightBadge: '⚡ MIDFIELD CONTROL & TEMPO',
+    badgeColor: 'bg-purple-500/20 text-purple-300 border border-purple-500/30',
+    goals: 0,
+    assists: 0,
+    chancesCreated: 2,
+    missedChances: 0,
+    keyStats: '89% Pass Acc • 4 Interceptions • 2 Key Transition Passes',
+    verdict: 'Composed midfield technician in the 8-a-side setup. Linked smartly with Captain Abrar, breaking up MCS transitions and circulating possession under pressure.',
+    isStarting: true
+  },
+  {
+    name: 'Savaiz',
+    team: 'Coach FC',
+    number: 29,
+    position: 'Forward / Striker',
+    photoUrl: '/players/savaiz.jpg',
+    photoSuitUrl: '/players/savaiz-suit.png',
+    photoFullKitUrl: '/players/savaiz.jpg',
+    rating: 7.0,
+    highlightBadge: '⚡ ACTIVE PRESSING • SUBBED 65\'',
+    badgeColor: 'bg-amber-500/20 text-amber-300 border border-amber-500/30',
+    goals: 0,
+    assists: 0,
+    chancesCreated: 1,
+    missedChances: 0,
+    keyStats: '65 Mins Played • 3 Pressing Recoveries • Substituted for Rafeeq',
+    verdict: 'High-energy starting forward in the 8-a-side duel. Stretched MCS defenders with relentless pressing before being substituted off in the 65th minute for Rafeeq.',
+    isStarting: true,
+    subMinute: 65,
+    subWith: 'Rafeeq'
+  },
+  {
+    name: 'Rafeeq',
+    team: 'Coach FC',
+    number: 18,
+    position: 'Forward / Impact Sub',
+    photoUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80',
+    photoSuitUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80',
+    photoFullKitUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80',
+    rating: 7.2,
+    highlightBadge: '🔄 IMPACT SUB (REPLACED SAVAIZ 65\')',
+    badgeColor: 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30',
+    goals: 0,
+    assists: 0,
+    chancesCreated: 1,
+    missedChances: 0,
+    keyStats: '25 Mins Played • Subbed on 65\' for Savaiz • 2 Dribbles',
+    verdict: 'Fresh legs and direct injection of pace off the bench! Substituted on for Savaiz in the 65th minute, harassing MCS backline and helping Coach FC secure the 3-3 draw.',
+    isStarting: false,
+    subMinute: 65,
+    subWith: 'Savaiz'
   }
 ];
 
-const RatingCardItem: React.FC<{ p: PlayerRating }> = ({ p }) => {
+export const SQUAD_PRESETS = [
+  { name: 'Abrar', number: 8, position: 'Midfield / Captain & Playmaker', photoUrl: '/players/tsukioynx-coachfc-studio.jpg' },
+  { name: 'Usman', number: 20, position: 'Midfield / Attacker', photoUrl: 'https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=600&q=80' },
+  { name: 'Zohaib', number: 16, position: 'Central Defender', photoUrl: '/players/zohaib.jpg' },
+  { name: 'Jibran', number: 13, position: 'Goalkeeper', photoUrl: '/players/jibran-real.png' },
+  { name: 'Huzaifa', number: 5, position: 'Central Defender', photoUrl: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=600&q=80' },
+  { name: 'Aliyan', number: 26, position: 'Defender / Fullback', photoUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80' },
+  { name: 'Faheem', number: 6, position: 'Midfield / Playmaker', photoUrl: '/players/faheem-real.jpg' },
+  { name: 'Savaiz', number: 29, position: 'Forward / Striker', photoUrl: '/players/savaiz.jpg' },
+  { name: 'Rafeeq', number: 18, position: 'Forward / Impact Sub', photoUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80' },
+  { name: 'Dilshad', number: 19, position: 'Striker', photoUrl: '/players/dilshad-real.png' },
+  { name: 'Sheryar', number: 27, position: 'Defender', photoUrl: '/players/sheryar-fullkit.jpg' },
+  { name: 'Danish', number: 3, position: 'Defender / Fullback', photoUrl: '/players/danish-fullkit.jpg' },
+  { name: 'Shakeel', number: 12, position: 'Defender', photoUrl: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=600&q=80' },
+  { name: 'Basit', number: 15, position: 'Defender', photoUrl: '/players/basit-gilgiti-real.jpg' },
+  { name: 'Lucas Vance', number: 1, position: 'Goalkeeper', photoUrl: 'https://images.unsplash.com/photo-1628157582853-a796fa650a6a?auto=format&fit=crop&w=600&q=80' },
+  { name: 'Jamshaid', number: 2, position: 'Defender / Right Back', photoUrl: '/players/jamshaid-fullkit.jpg' },
+  { name: 'Hamza', number: 1, position: 'Goalkeeper', photoUrl: 'https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=600&q=80' }
+];
+
+interface RatingCardProps {
+  p: PlayerRating;
+  index: number;
+  isAdminMode?: boolean;
+  onQuickRate?: (delta: number) => void;
+  onEdit?: () => void;
+  onRemove?: () => void;
+}
+
+const RatingCardItem: React.FC<RatingCardProps> = ({ 
+  p, 
+  index,
+  isAdminMode, 
+  onQuickRate, 
+  onEdit, 
+  onRemove 
+}) => {
   const [photoMode, setPhotoMode] = useState<'KIT' | 'SUIT'>('KIT');
   const activePhoto = photoMode === 'SUIT' && p.photoSuitUrl ? p.photoSuitUrl : (p.photoFullKitUrl || p.photoUrl);
 
   return (
-    <div className="bg-[#171F2C] border border-[#283141] hover:border-[#C6FF00]/40 rounded-2xl p-5 transition-all duration-300 flex flex-col justify-between hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)] group">
+    <div className={`bg-[#171F2C] border transition-all duration-300 rounded-3xl p-5 flex flex-col justify-between hover:shadow-[0_15px_35px_rgba(0,0,0,0.6)] group relative ${
+      isAdminMode ? 'border-[#C6FF00]/40 ring-1 ring-[#C6FF00]/20' : 'border-[#283141] hover:border-[#C6FF00]/40'
+    }`}>
+      {/* Admin Floating Quick Controls Bar */}
+      {isAdminMode && (
+        <div className="flex items-center justify-between gap-2 mb-3 px-3 py-1.5 rounded-xl bg-[#080B12]/90 border border-[#C6FF00]/40 text-xs font-mono">
+          <div className="flex items-center gap-1.5 text-[#C6FF00] font-bold">
+            <Sliders className="w-3.5 h-3.5" />
+            <span className="text-[10px] uppercase tracking-wider">Admin Controls</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <button
+              onClick={onEdit}
+              title="Edit Player Details"
+              className="px-2 py-1 rounded-md bg-[#283141] hover:bg-[#C6FF00] hover:text-[#080B12] text-[#F5F7FA] font-bold text-[10px] transition-all flex items-center gap-1"
+            >
+              <Edit3 className="w-3 h-3" />
+              <span>Edit</span>
+            </button>
+            <button
+              onClick={onRemove}
+              title="Remove Player From Match"
+              className="px-2 py-1 rounded-md bg-rose-500/20 hover:bg-rose-500 text-rose-300 hover:text-white font-bold text-[10px] transition-all flex items-center gap-1 border border-rose-500/30"
+            >
+              <Trash2 className="w-3 h-3" />
+              <span>Remove</span>
+            </button>
+          </div>
+        </div>
+      )}
+
       <div>
         {/* Full-Kit / Player Portrait Preview */}
         {activePhoto && (
-          <div className="relative mb-4 rounded-xl overflow-hidden bg-[#080B12] border border-[#283141] group-hover:border-[#C6FF00]/60 transition-all h-64 sm:h-72">
+          <div className="relative mb-4 rounded-2xl overflow-hidden bg-[#080B12] border border-[#283141] group-hover:border-[#C6FF00]/60 transition-all h-64 sm:h-72">
             <img
               src={activePhoto}
               alt={p.name}
               className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
             />
             {/* Team & Number Floating Badge */}
-            <span className={`absolute top-2.5 left-2.5 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded shadow backdrop-blur-md ${
-              p.team === 'Blue Lock FC'
-                ? 'bg-blue-600/90 text-white border border-blue-400/40'
-                : 'bg-[#C6FF00] text-[#080B12] font-black'
-            }`}>
-              {p.team} • #{p.number}
-            </span>
+            <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5 flex-wrap">
+              <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-lg shadow backdrop-blur-md ${
+                p.team === 'Blue Lock FC'
+                  ? 'bg-blue-600/90 text-white border border-blue-400/40'
+                  : 'bg-[#C6FF00] text-[#080B12] font-black'
+              }`}>
+                {p.team} • #{p.number}
+              </span>
+              {p.isStarting === false ? (
+                <span className="text-[9px] font-bold uppercase px-2 py-0.5 rounded-lg bg-emerald-500/90 text-white shadow backdrop-blur-md">
+                  🔄 Sub
+                </span>
+              ) : (
+                <span className="text-[9px] font-bold uppercase px-2 py-0.5 rounded-lg bg-black/75 text-[#F5F7FA] border border-white/10 shadow backdrop-blur-md">
+                  Starter
+                </span>
+              )}
+            </div>
 
-            {/* Rating Floating Badge */}
-            <div className={`absolute top-2.5 right-2.5 px-2.5 py-1 rounded-lg flex items-center gap-1 font-black shadow-lg ${
-              p.rating >= 9.0
-                ? 'bg-[#C6FF00] text-[#080B12]'
-                : p.rating >= 8.0
-                ? 'bg-blue-500 text-white'
-                : 'bg-[#171F2C]/90 text-[#F5F7FA] border border-[#283141]'
-            }`}>
-              <span className="text-sm">{p.rating.toFixed(1)}</span>
-              <span className="text-[9px] opacity-70">/10</span>
+            {/* Rating Floating Badge with Live Admin Increment/Decrement */}
+            <div className="absolute top-2.5 right-2.5 flex items-center gap-1">
+              {isAdminMode && onQuickRate && (
+                <button
+                  onClick={() => onQuickRate(-0.1)}
+                  title="Decrease Rating by 0.1"
+                  className="w-7 h-7 rounded-lg bg-black/85 hover:bg-rose-600 text-white font-black text-sm flex items-center justify-center border border-white/20 transition-all shadow-md active:scale-95"
+                >
+                  -
+                </button>
+              )}
+              <div className={`px-2.5 py-1 rounded-xl flex items-center gap-1 font-black shadow-lg ${
+                p.rating >= 9.0
+                  ? 'bg-[#C6FF00] text-[#080B12]'
+                  : p.rating >= 8.0
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-[#171F2C]/90 text-[#F5F7FA] border border-[#283141]'
+              }`}>
+                <span className="text-sm">{p.rating.toFixed(1)}</span>
+                <span className="text-[9px] opacity-70">/10</span>
+              </div>
+              {isAdminMode && onQuickRate && (
+                <button
+                  onClick={() => onQuickRate(0.1)}
+                  title="Increase Rating by 0.1"
+                  className="w-7 h-7 rounded-lg bg-black/85 hover:bg-[#C6FF00] hover:text-[#080B12] text-white font-black text-sm flex items-center justify-center border border-white/20 transition-all shadow-md active:scale-95"
+                >
+                  +
+                </button>
+              )}
             </div>
 
             {/* Full Kit Tag */}
-            <span className="absolute bottom-2 left-2 px-2 py-0.5 rounded bg-black/75 backdrop-blur text-[9px] font-mono text-[#F5F7FA] border border-white/10">
-              {p.team === 'Coach FC' ? 'Coach FC Kit • Head to Cleats' : 'Blue Lock FC Studio'}
+            <span className="absolute bottom-2 left-2 px-2.5 py-0.5 rounded-lg bg-black/75 backdrop-blur text-[9px] font-mono text-[#F5F7FA] border border-white/10">
+              {p.team === 'Coach FC' ? 'Official Coach FC Kit' : 'Blue Lock FC Studio'}
             </span>
           </div>
         )}
@@ -405,15 +571,20 @@ const RatingCardItem: React.FC<{ p: PlayerRating }> = ({ p }) => {
         {/* Identity & Position */}
         <div className="flex items-center justify-between gap-2 mb-3">
           <div>
-            <h4 className="text-lg font-black text-[#F5F7FA] group-hover:text-[#C6FF00] transition-colors">
-              {p.name}
+            <h4 className="text-lg font-black text-[#F5F7FA] group-hover:text-[#C6FF00] transition-colors flex items-center gap-2">
+              <span>{p.name}</span>
+              {p.isKeyPlayer && (
+                <span className="px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-[#C6FF00] text-[#080B12]">
+                  KEY
+                </span>
+              )}
             </h4>
             <span className="text-xs text-[#929BA9] font-mono">
               {p.position}
             </span>
           </div>
           {p.photoSuitUrl && p.photoSuitUrl !== p.photoUrl && (
-            <div className="flex items-center gap-1 bg-[#080B12] p-1 rounded-lg border border-[#283141]">
+            <div className="flex items-center gap-1 bg-[#080B12] p-1 rounded-xl border border-[#283141]">
               <button
                 onClick={() => setPhotoMode('KIT')}
                 className={`px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider transition-all ${
@@ -434,25 +605,17 @@ const RatingCardItem: React.FC<{ p: PlayerRating }> = ({ p }) => {
           )}
         </div>
 
-        {/* Zohaib Verified Kit Badge */}
-        {p.number === 16 && p.name === 'Zohaib' && (
-          <div className="mb-3 px-2.5 py-1 rounded-lg bg-[#080B12] border border-[#283141] flex items-center justify-between text-[10px] font-mono">
-            <span className="text-[#929BA9]">Pitch Session:</span>
-            <span className="text-[#C6FF00] font-bold">Jersey #16 Back View 🇵🇰</span>
-          </div>
-        )}
-
         {/* Highlight Badge if exists */}
         {p.highlightBadge && (
           <div className="mb-4">
-            <span className={`inline-block px-2.5 py-1 rounded-md text-[11px] font-black uppercase tracking-wider ${p.badgeColor}`}>
+            <span className={`inline-block px-3 py-1 rounded-lg text-[11px] font-black uppercase tracking-wider shadow-sm ${p.badgeColor || 'bg-[#C6FF00] text-[#080B12]'}`}>
               {p.highlightBadge}
             </span>
           </div>
         )}
 
         {/* Key Stats Bar */}
-        <div className="bg-[#080B12] p-3 rounded-xl border border-[#283141] text-xs font-mono text-[#F5F7FA] mb-4">
+        <div className="bg-[#080B12] p-3 rounded-2xl border border-[#283141] text-xs font-mono text-[#F5F7FA] mb-4 leading-relaxed">
           {p.keyStats}
         </div>
 
@@ -465,9 +628,9 @@ const RatingCardItem: React.FC<{ p: PlayerRating }> = ({ p }) => {
       {/* Stat Counter Badges */}
       <div className="pt-4 border-t border-[#283141] flex items-center justify-between text-xs font-mono text-[#929BA9]">
         <div className="flex items-center gap-3">
-          <span>⚽ <strong>{p.goals}</strong> G</span>
-          <span>🎯 <strong>{p.assists}</strong> A</span>
-          {p.chancesCreated > 0 && <span>⚡ <strong>{p.chancesCreated}</strong> Ch</span>}
+          <span className="flex items-center gap-1">⚽ <strong>{p.goals}</strong> G</span>
+          <span className="flex items-center gap-1">🎯 <strong>{p.assists}</strong> A</span>
+          {p.chancesCreated > 0 && <span className="flex items-center gap-1">⚡ <strong>{p.chancesCreated}</strong> Ch</span>}
         </div>
         {p.missedChances > 0 && (
           <span className="text-rose-400 font-bold">
@@ -484,34 +647,115 @@ export const MatchCenterView: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'derby-history' | 'ratings' | 'timeline' | 'lineups' | 'stats' | 'gallery'>('ratings');
   const [teamFilter, setTeamFilter] = useState<'ALL' | 'BLUE_LOCK' | 'COACH_FC'>('ALL');
 
+  // Admin Match Manager Mode & Local Storage Persistence
+  const [isAdminMode, setIsAdminMode] = useState<boolean>(true);
+  const [customRatings, setCustomRatings] = useState<Record<string, PlayerRating[]>>({});
+  const [editingPlayer, setEditingPlayer] = useState<{ index: number; player: PlayerRating } | null>(null);
+  const [isAddPlayerOpen, setIsAddPlayerOpen] = useState<boolean>(false);
+  const [notification, setNotification] = useState<string | null>(null);
+  const [newPlayerForm, setNewPlayerForm] = useState<PlayerRating>({
+    name: '',
+    team: 'Coach FC',
+    number: 10,
+    position: 'Midfield / Playmaker',
+    photoUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80',
+    rating: 7.5,
+    highlightBadge: '⚡ MATCH CONTRIBUTOR',
+    badgeColor: 'bg-[#C6FF00] text-[#080B12]',
+    goals: 0,
+    assists: 0,
+    chancesCreated: 1,
+    missedChances: 0,
+    keyStats: 'Composed shift • Solid distribution • Key presence',
+    verdict: 'Worked diligently across the pitch, executing tactical instructions with discipline.',
+    isStarting: true
+  });
+
   // Load latest dynamically configured matches from DB
   const matches = db.getMatches();
   const mcsMatch = matches.find(m => m.id === 'm-mcs-captains');
   const oct14Match = matches.find(m => m.matchDate === '2026-10-14' || m.id === 'm-1');
 
+  // Load saved custom ratings from localStorage
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(`coachfc_ratings_${selectedMatchId}`);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setCustomRatings(prev => ({ ...prev, [selectedMatchId]: parsed }));
+        }
+      }
+    } catch (e) {
+      console.error('Failed to load saved ratings:', e);
+    }
+  }, [selectedMatchId]);
+
+  const saveRatingsForMatch = (newRatings: PlayerRating[]) => {
+    setCustomRatings(prev => ({ ...prev, [selectedMatchId]: newRatings }));
+    try {
+      localStorage.setItem(`coachfc_ratings_${selectedMatchId}`, JSON.stringify(newRatings));
+    } catch (e) {
+      console.error('Failed to save ratings:', e);
+    }
+  };
+
+  const handleResetRatings = () => {
+    try {
+      localStorage.removeItem(`coachfc_ratings_${selectedMatchId}`);
+    } catch (e) {}
+    setCustomRatings(prev => {
+      const copy = { ...prev };
+      delete copy[selectedMatchId];
+      return copy;
+    });
+    setNotification('Restored official verified match data.');
+    setTimeout(() => setNotification(null), 3000);
+  };
+
   // Base ratings depending on selected match
   const baseRatings = selectedMatchId === 'm-mcs-captains' ? MCS_CAPTAINS_RATINGS : PLAYER_RATINGS;
   const currentMatchDb = selectedMatchId === 'm-mcs-captains' ? mcsMatch : oct14Match;
+  const activeRatingsList = customRatings[selectedMatchId] || baseRatings;
 
-  // Merge default ratings with any custom ratings saved via match edit form
-  const mergedRatings: PlayerRating[] = [...baseRatings];
-  if (currentMatchDb?.playerRatings && currentMatchDb.playerRatings.length > 0) {
-    currentMatchDb.playerRatings.forEach(dbRating => {
-      const idx = mergedRatings.findIndex(r => r.name.toLowerCase() === dbRating.name.toLowerCase());
-      if (idx !== -1) {
-        mergedRatings[idx] = { 
-          ...mergedRatings[idx], 
-          rating: dbRating.rating,
-          highlightBadge: dbRating.highlightBadge || mergedRatings[idx].highlightBadge,
-          badgeColor: dbRating.badgeColor || mergedRatings[idx].badgeColor
-        };
-      } else {
-        mergedRatings.push(dbRating as PlayerRating);
-      }
-    });
-  }
+  const handleQuickRate = (idx: number, delta: number) => {
+    const list = [...activeRatingsList];
+    if (!list[idx]) return;
+    const newRating = Math.max(1.0, Math.min(10.0, +(list[idx].rating + delta).toFixed(1)));
+    list[idx] = { ...list[idx], rating: newRating };
+    saveRatingsForMatch(list);
+    setNotification(`${list[idx].name} rating adjusted to ${newRating.toFixed(1)}`);
+    setTimeout(() => setNotification(null), 2000);
+  };
 
-  const filteredRatings = mergedRatings.filter(p => {
+  const handleRemovePlayer = (idx: number) => {
+    const list = [...activeRatingsList];
+    const removedName = list[idx]?.name;
+    list.splice(idx, 1);
+    saveRatingsForMatch(list);
+    setNotification(`${removedName} removed from match squad.`);
+    setTimeout(() => setNotification(null), 3000);
+  };
+
+  const handleSaveEditedPlayer = (updated: PlayerRating) => {
+    if (editingPlayer === null) return;
+    const list = [...activeRatingsList];
+    list[editingPlayer.index] = updated;
+    saveRatingsForMatch(list);
+    setEditingPlayer(null);
+    setNotification(`Updated details for ${updated.name}.`);
+    setTimeout(() => setNotification(null), 3000);
+  };
+
+  const handleAddPlayer = (newPlayer: PlayerRating) => {
+    const list = [...activeRatingsList, newPlayer];
+    saveRatingsForMatch(list);
+    setIsAddPlayerOpen(false);
+    setNotification(`Added ${newPlayer.name} to match squad.`);
+    setTimeout(() => setNotification(null), 3000);
+  };
+
+  const filteredRatings = activeRatingsList.filter(p => {
     if (teamFilter === 'BLUE_LOCK') return p.team === 'Blue Lock FC';
     if (teamFilter === 'COACH_FC') return p.team === 'Coach FC';
     return true;
@@ -540,31 +784,81 @@ export const MatchCenterView: React.FC = () => {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           
-          {/* Match Switcher Selector */}
-          <div className="flex flex-wrap items-center gap-3 mb-6">
-            <button
-              onClick={() => { setSelectedMatchId('m-mcs-captains'); setActiveTab('ratings'); }}
-              className={`px-4 py-2.5 rounded-2xl text-xs font-black uppercase tracking-wider transition-all flex items-center gap-2 ${
-                selectedMatchId === 'm-mcs-captains'
-                  ? 'bg-[#C6FF00] text-[#080B12] shadow-[0_0_20px_rgba(198,255,0,0.4)]'
-                  : 'bg-[#171F2C] text-[#929BA9] border border-[#283141] hover:text-[#F5F7FA]'
-              }`}
-            >
-              <Flame className="w-4 h-4 text-orange-500 fill-current" />
-              <span>⭐ LATEST: MCS Captains 3 - 3 Coach FC (Wed 21 Oct)</span>
-            </button>
-            <button
-              onClick={() => { setSelectedMatchId('m-1'); setActiveTab('derby-history'); }}
-              className={`px-4 py-2.5 rounded-2xl text-xs font-black uppercase tracking-wider transition-all flex items-center gap-2 ${
-                selectedMatchId === 'm-1'
-                  ? 'bg-blue-500 text-white shadow-[0_0_20px_rgba(59,130,246,0.4)]'
-                  : 'bg-[#171F2C] text-[#929BA9] border border-[#283141] hover:text-[#F5F7FA]'
-              }`}
-            >
-              <Trophy className="w-4 h-4 text-amber-300" />
-              <span>Blue Lock FC 4 - 3 Coach FC (14 Oct Derby)</span>
-            </button>
+          {/* Match Switcher Selector & Admin Mode Controls */}
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+            <div className="flex flex-wrap items-center gap-3">
+              <button
+                onClick={() => { setSelectedMatchId('m-mcs-captains'); setActiveTab('ratings'); }}
+                className={`px-4 py-2.5 rounded-2xl text-xs font-black uppercase tracking-wider transition-all flex items-center gap-2 ${
+                  selectedMatchId === 'm-mcs-captains'
+                    ? 'bg-[#C6FF00] text-[#080B12] shadow-[0_0_20px_rgba(198,255,0,0.4)]'
+                    : 'bg-[#171F2C] text-[#929BA9] border border-[#283141] hover:text-[#F5F7FA]'
+                }`}
+              >
+                <Flame className="w-4 h-4 text-orange-500 fill-current" />
+                <span>⭐ LATEST: MCS Captains 3 - 3 Coach FC (Wed 21 Oct)</span>
+              </button>
+              <button
+                onClick={() => { setSelectedMatchId('m-1'); setActiveTab('derby-history'); }}
+                className={`px-4 py-2.5 rounded-2xl text-xs font-black uppercase tracking-wider transition-all flex items-center gap-2 ${
+                  selectedMatchId === 'm-1'
+                    ? 'bg-blue-500 text-white shadow-[0_0_20px_rgba(59,130,246,0.4)]'
+                    : 'bg-[#171F2C] text-[#929BA9] border border-[#283141] hover:text-[#F5F7FA]'
+                }`}
+              >
+                <Trophy className="w-4 h-4 text-amber-300" />
+                <span>Blue Lock FC 4 - 3 Coach FC (14 Oct Derby)</span>
+              </button>
+            </div>
+
+            {/* Admin Interactive Toggle & Quick Actions */}
+            <div className="flex items-center gap-2 flex-wrap">
+              <button
+                onClick={() => setIsAdminMode(!isAdminMode)}
+                className={`px-3.5 py-2 rounded-2xl text-xs font-black uppercase tracking-wider transition-all flex items-center gap-2 border ${
+                  isAdminMode
+                    ? 'bg-[#C6FF00]/15 text-[#C6FF00] border-[#C6FF00] shadow-[0_0_15px_rgba(198,255,0,0.3)]'
+                    : 'bg-[#171F2C] text-[#929BA9] border-[#283141] hover:text-[#F5F7FA]'
+                }`}
+              >
+                {isAdminMode ? <Unlock className="w-3.5 h-3.5 text-[#C6FF00]" /> : <Lock className="w-3.5 h-3.5 text-[#929BA9]" />}
+                <span>⚡ Admin Mode: {isAdminMode ? 'ACTIVE' : 'OFF'}</span>
+              </button>
+
+              {isAdminMode && (
+                <>
+                  <button
+                    onClick={() => setIsAddPlayerOpen(true)}
+                    className="px-3.5 py-2 rounded-2xl text-xs font-black uppercase tracking-wider bg-[#C6FF00] text-[#080B12] hover:bg-lime-400 transition-all flex items-center gap-1.5 shadow-md active:scale-95"
+                  >
+                    <UserPlus className="w-3.5 h-3.5" />
+                    <span>+ Add Player</span>
+                  </button>
+                  <button
+                    onClick={handleResetRatings}
+                    title="Reset to official match records"
+                    className="px-3 py-2 rounded-2xl text-xs font-semibold uppercase tracking-wider bg-[#171F2C] hover:bg-[#283141] text-[#929BA9] hover:text-[#F5F7FA] border border-[#283141] transition-all flex items-center gap-1"
+                  >
+                    <RotateCcw className="w-3.5 h-3.5" />
+                    <span className="hidden sm:inline">Reset</span>
+                  </button>
+                </>
+              )}
+            </div>
           </div>
+
+          {/* Live Notification Feedback Toast */}
+          {notification && (
+            <div className="mb-4 px-4 py-2.5 rounded-2xl bg-[#C6FF00]/20 border border-[#C6FF00] text-[#C6FF00] text-xs font-mono font-bold flex items-center justify-between animate-fadeIn shadow-[0_0_20px_rgba(198,255,0,0.3)]">
+              <span className="flex items-center gap-2">
+                <Check className="w-4 h-4 text-[#C6FF00]" />
+                {notification}
+              </span>
+              <button onClick={() => setNotification(null)} className="text-[#C6FF00] hover:text-white">
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+          )}
 
           {/* Top Banner Tag */}
           <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
@@ -572,7 +866,7 @@ export const MatchCenterView: React.FC = () => {
               <span className="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse" />
               <span>
                 {selectedMatchId === 'm-mcs-captains'
-                  ? 'FULL TIME • 3 - 3 THRILLER • 9 BIG CHANCES CREATED'
+                  ? 'FULL TIME • 3 - 3 THRILLER • 8-A-SIDE • 9 BIG CHANCES CREATED'
                   : 'FULL TIME • 7-GOAL THRILLER'}
               </span>
             </div>
@@ -628,8 +922,8 @@ export const MatchCenterView: React.FC = () => {
                       </div>
                       <div className="flex items-center gap-2 lg:justify-end">
                         <span className="text-[#C6FF00] font-mono">52&apos;</span>
-                        <span className="font-bold">Hamza (OG)</span>
-                        <span className="text-orange-300 text-[11px] font-semibold">(Accidental Back-Heel Clearance Under Pressure)</span>
+                        <span className="font-bold">Jibran (OG)</span>
+                        <span className="text-orange-300 text-[11px] font-semibold">(Accidental Back-Heel Clearance Under Heavy Pressure)</span>
                       </div>
                       <div className="flex items-center gap-2 lg:justify-end">
                         <span className="text-[#C6FF00] font-mono">85&apos;</span>
@@ -679,7 +973,7 @@ export const MatchCenterView: React.FC = () => {
                   HT: {selectedMatchId === 'm-mcs-captains' ? '1 - 1' : '2 - 1'}
                 </div>
                 <span className="mt-3 text-[10px] uppercase tracking-widest text-[#929BA9] font-bold">
-                  Final Whistle
+                  Final Whistle • 8-a-Side
                 </span>
               </div>
 
@@ -695,7 +989,7 @@ export const MatchCenterView: React.FC = () => {
                 </h2>
                 <p className="text-xs sm:text-sm text-[#929BA9] mt-1 font-mono">
                   {selectedMatchId === 'm-mcs-captains'
-                    ? 'Abrar 9 Chances • 1G+2A • Usman Volley • Zohaib Header'
+                    ? 'Abrar 1G Solo + 1A (to Zohaib) + 9 Chances • Usman Solo Golazo • Zohaib Bullet Header • Jibran GK 8 Saves • Savaiz Sub with Rafeeq'
                     : 'Sensational Volley, Free-Kick & Late Rush'}
                 </p>
 
@@ -706,17 +1000,17 @@ export const MatchCenterView: React.FC = () => {
                       <div className="flex items-center gap-2 justify-center lg:justify-start">
                         <span className="text-[#C6FF00] font-mono">18&apos;</span>
                         <span className="font-bold">Abrar (Captain)</span>
-                        <span className="text-amber-300 text-[11px] font-semibold">(Clinical Solo Strike • 0-1)</span>
+                        <span className="text-amber-300 text-[11px] font-semibold">(Clinical Solo Wonder Strike • 0-1)</span>
                       </div>
                       <div className="flex items-center gap-2 justify-center lg:justify-start">
                         <span className="text-[#C6FF00] font-mono">64&apos;</span>
                         <span className="font-bold">Usman</span>
-                        <span className="text-emerald-300 text-[11px] font-semibold">(Thunderbolt Volley! • Assist: Abrar)</span>
+                        <span className="text-emerald-300 text-[11px] font-semibold">(Sensational Solo Thunderbolt Golazo! • 2-2)</span>
                       </div>
                       <div className="flex items-center gap-2 justify-center lg:justify-start">
                         <span className="text-[#C6FF00] font-mono">76&apos;</span>
                         <span className="font-bold">Zohaib</span>
-                        <span className="text-cyan-300 text-[11px] font-semibold">(Towering Bullet Header! • Assist: Abrar)</span>
+                        <span className="text-cyan-300 text-[11px] font-semibold">(Towering Bullet Header! • Assist: Captain Abrar • 2-3)</span>
                       </div>
                     </>
                   ) : (
@@ -777,8 +1071,8 @@ export const MatchCenterView: React.FC = () => {
                 <p>
                   {selectedMatchId === 'm-mcs-captains' ? (
                     <>
-                      <strong className="text-[#F5F7FA]">Match Breakdown (Wednesday Showcase): </strong>
-                      An electric 6-goal duel! Coach FC captain <strong>Abrar was the undisputed Master of the Pitch</strong>, crafting an incredible <strong>9 BIG CHANCES CREATED</strong>, 1 goal, and 2 pinpoint assists. <strong>Usman</strong> rocketed home an unstoppable volley, and <strong>Zohaib</strong> powered in a set-piece bullet header off Abrar’s pinpoint delivery. In defense, <strong>Zohaib and Huzaifa struggled under MCS pressure</strong>, though Huzaifa proved defensively much better in positioning and ground reading. <strong>Aliyan</strong> maintained his standing as Coach FC’s clean sheet leader (16 CS), <strong>Jamshaid</strong> gave an uncompromising shift in the full kit (#2), while keeper <strong>Hamza</strong> made 8 crucial saves to preserve the draw despite an accidental back-heel own goal under heavy traffic.
+                      <strong className="text-[#F5F7FA]">Verified 8-a-Side Match Breakdown (Wednesday Showcase): </strong>
+                      An electric 6-goal thriller! Coach FC captain <strong>Abrar was the undisputed Master of the Pitch</strong>, crafting an incredible <strong>9 BIG CHANCES CREATED</strong>, scoring an 18&apos; solo wonder goal, and delivering the pinpoint corner assist for Zohaib&apos;s 76&apos; bullet header. <strong>Usman</strong> powered home an unassisted solo thunderbolt golazo on 64&apos; with searing velocity. In goal, <strong>Jibran stepped in heroically as goalkeeper</strong>, pulling off <strong>8 decisive clutch saves</strong> to keep Coach FC in the match despite an unfortunate accidental back-heel clearance own goal on 52&apos; under intense pressure. In defense, <strong>Huzaifa proved defensively superior to Zohaib</strong> in reading ground challenges and positional duels. <strong>Aliyan</strong> maintained his standing as Coach FC’s clean sheet leader (16 CS), <strong>Faheem</strong> dictated tempo and distribution in midfield, while starting forward <strong>Savaiz</strong> pressed relentlessly for 65 minutes before being tactically substituted for <strong>Rafeeq</strong>, whose fresh energy on the right flank preserved the 3-3 draw. (Jamshaid and Hamza did not play).
                     </>
                   ) : (
                     <>
@@ -936,12 +1230,20 @@ export const MatchCenterView: React.FC = () => {
             {/* Header & Filter */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-[#111722] p-6 rounded-2xl border border-[#283141]">
               <div>
-                <h3 className="text-2xl font-black text-[#F5F7FA]">
-                  Decided Player Ratings
-                </h3>
+                <div className="flex items-center gap-3">
+                  <h3 className="text-2xl font-black text-[#F5F7FA]">
+                    Decided Player Ratings
+                  </h3>
+                  {isAdminMode && (
+                    <span className="px-2.5 py-0.5 rounded-full bg-[#C6FF00]/15 text-[#C6FF00] border border-[#C6FF00]/40 text-[10px] font-mono font-bold uppercase tracking-wider flex items-center gap-1">
+                      <Sliders className="w-3 h-3" />
+                      Live Editing Active
+                    </span>
+                  )}
+                </div>
                 <p className="text-xs text-[#929BA9] mt-1 font-mono">
                   {selectedMatchId === 'm-mcs-captains'
-                    ? 'Ratings reflect Captain Abrar’s 9 big chances created, 1 goal & 2 assists, Usman’s volley, Zohaib’s bullet header, Hamza’s 8 crucial saves despite unfortunate back-heel OG, and Huzaifa’s defensive shifts.'
+                    ? 'Ratings reflect Captain Abrar’s 9 big chances created, 1 solo goal & 1 assist to Zohaib, Usman’s solo golazo, Zohaib’s bullet header, Jibran’s 8 crucial saves despite accidental back-heel OG, Savaiz subbed 65\' for Rafeeq, and Faheem’s midfield control.'
                     : 'Ratings reflect Abrar’s solo power strike & 2 assists, Faheem’s dodge goal, Aliyan’s volley, Sheryar’s free kick, Dilshad’s brace & misses, and Savaiz’s tap-in & missed chances.'}
                 </p>
               </div>
@@ -956,7 +1258,7 @@ export const MatchCenterView: React.FC = () => {
                       : 'text-[#929BA9] hover:text-[#F5F7FA]'
                   }`}
                 >
-                  All ({mergedRatings.length})
+                  All ({activeRatingsList.length})
                 </button>
                 <button
                   onClick={() => setTeamFilter('COACH_FC')}
@@ -966,7 +1268,7 @@ export const MatchCenterView: React.FC = () => {
                       : 'text-[#929BA9] hover:text-[#F5F7FA]'
                   }`}
                 >
-                  Coach FC ({mergedRatings.filter(p => p.team === 'Coach FC').length})
+                  Coach FC ({activeRatingsList.filter(p => p.team === 'Coach FC').length})
                 </button>
                 {selectedMatchId === 'm-1' && (
                   <button
@@ -977,17 +1279,67 @@ export const MatchCenterView: React.FC = () => {
                         : 'text-[#929BA9] hover:text-[#F5F7FA]'
                     }`}
                   >
-                    Blue Lock FC ({mergedRatings.filter(p => p.team === 'Blue Lock FC').length})
+                    Blue Lock FC ({activeRatingsList.filter(p => p.team === 'Blue Lock FC').length})
                   </button>
                 )}
               </div>
             </div>
 
+            {/* Admin Management Action Bar */}
+            {isAdminMode && (
+              <div className="p-4 rounded-2xl bg-gradient-to-r from-[#171F2C] to-[#111722] border border-[#C6FF00]/40 flex flex-wrap items-center justify-between gap-4 shadow-[0_10px_25px_rgba(0,0,0,0.5)]">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-[#C6FF00]/20 border border-[#C6FF00] flex items-center justify-center text-[#C6FF00]">
+                    <Sliders className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-[#F5F7FA] flex items-center gap-2">
+                      <span>Admin Match Operations Center</span>
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#C6FF00] text-[#080B12] font-black">ACTIVE</span>
+                    </h4>
+                    <p className="text-xs text-[#929BA9]">
+                      Rate any player on the fly (+/- buttons), click Edit to modify stats/badges, or add/remove players who played.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 flex-wrap">
+                  <button
+                    onClick={() => setIsAddPlayerOpen(true)}
+                    className="px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider bg-[#C6FF00] text-[#080B12] hover:bg-lime-400 transition-all flex items-center gap-1.5 shadow-md active:scale-95"
+                  >
+                    <UserPlus className="w-4 h-4" />
+                    <span>+ Add Player to Match</span>
+                  </button>
+                  <button
+                    onClick={handleResetRatings}
+                    className="px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-[#080B12] hover:bg-[#283141] text-[#929BA9] hover:text-[#F5F7FA] border border-[#283141] transition-all flex items-center gap-1.5"
+                  >
+                    <RotateCcw className="w-3.5 h-3.5" />
+                    <span>Restore Official Match Data</span>
+                  </button>
+                </div>
+              </div>
+            )}
+
             {/* Player Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredRatings.map((p, idx) => (
-                <RatingCardItem key={idx} p={p} />
-              ))}
+              {filteredRatings.map((p, idx) => {
+                // Find index in master list for correct state modification
+                const masterIdx = activeRatingsList.findIndex(item => item.name === p.name && item.team === p.team);
+                const targetIdx = masterIdx !== -1 ? masterIdx : idx;
+                return (
+                  <RatingCardItem 
+                    key={`${p.name}-${p.team}-${idx}`} 
+                    p={p} 
+                    index={targetIdx}
+                    isAdminMode={isAdminMode}
+                    onQuickRate={(delta) => handleQuickRate(targetIdx, delta)}
+                    onEdit={() => setEditingPlayer({ index: targetIdx, player: { ...p } })}
+                    onRemove={() => handleRemovePlayer(targetIdx)}
+                  />
+                );
+              })}
             </div>
           </div>
         )}
@@ -1050,9 +1402,9 @@ export const MatchCenterView: React.FC = () => {
                   </div>
                 </div>
 
-                {/* 41' HAMZA HEROIC DOUBLE SAVE */}
+                {/* 41' JIBRAN HEROIC DOUBLE SAVE */}
                 <div className="relative group">
-                  <div className="absolute -left-[35px] sm:-left-[51px] top-1.5 w-7 h-7 rounded-full bg-blue-500 text-white flex items-center justify-center font-black text-xs">
+                  <div className="absolute -left-[35px] sm:-left-[51px] top-1.5 w-7 h-7 rounded-full bg-blue-500 text-white flex items-center justify-center font-black text-xs shadow-md">
                     🧤
                   </div>
                   <div className="bg-[#171F2C] border border-blue-500/30 p-5 rounded-2xl">
@@ -1061,15 +1413,15 @@ export const MatchCenterView: React.FC = () => {
                       <span className="text-[#929BA9]">Score: 1 - 1</span>
                     </div>
                     <h4 className="text-sm font-bold text-blue-300">
-                      Hamza point-blank reflex double save
+                      Jibran point-blank reflex double save
                     </h4>
                     <p className="text-xs text-[#929BA9] mt-1">
-                      MCS striker breaks free 6 yards out, but Hamza throws his body on the line to block the first effort and scrambles back to claw the rebound away from danger!
+                      MCS striker breaks free 6 yards out, but goalkeeper Jibran throws his body on the line to block the first effort and scrambles back to claw the rebound away from danger!
                     </p>
                   </div>
                 </div>
 
-                {/* 52' HAMZA ACCIDENTAL BACK-HEEL OWN GOAL */}
+                {/* 52' JIBRAN ACCIDENTAL BACK-HEEL OWN GOAL */}
                 <div className="relative group">
                   <div className="absolute -left-[35px] sm:-left-[51px] top-1.5 w-7 h-7 rounded-full bg-rose-500 text-white flex items-center justify-center font-black text-xs">
                     ⚠️
@@ -1080,16 +1432,16 @@ export const MatchCenterView: React.FC = () => {
                       <span className="text-xs font-black text-[#F5F7FA]">2 - 1</span>
                     </div>
                     <h4 className="text-base font-bold text-rose-300 flex items-center gap-2">
-                      <span>Keeper Hamza accidental back-heel clearance deflection</span>
+                      <span>Keeper Jibran accidental back-heel clearance deflection</span>
                       <span className="text-xs font-mono px-2 py-0.5 rounded bg-rose-500/20 text-rose-300">SCORER 2 / OG</span>
                     </h4>
                     <p className="text-xs text-[#929BA9] mt-1 leading-relaxed">
-                      Heavy back-pass pressure forces keeper Hamza into a hurried back-heel clearance flick near the goal line; mistakenly misdirected, the ball trickles across into the net under intense challenge.
+                      Heavy back-pass pressure forces keeper Jibran into a hurried back-heel clearance flick near the goal line; mistakenly misdirected under heavy traffic, the ball trickles across into the net.
                     </p>
                   </div>
                 </div>
 
-                {/* 64' USMAN VOLLEY GOAL */}
+                {/* 64' USMAN SOLO THUNDERBOLT GOLAZO */}
                 <div className="relative group">
                   <div className="absolute -left-[35px] sm:-left-[51px] top-1.5 w-7 h-7 rounded-full bg-[#C6FF00] text-[#080B12] flex items-center justify-center font-black text-xs shadow-[0_0_15px_rgba(198,255,0,0.5)]">
                     ⚽
@@ -1100,11 +1452,31 @@ export const MatchCenterView: React.FC = () => {
                       <span className="text-xs font-black text-[#F5F7FA]">2 - 2</span>
                     </div>
                     <h4 className="text-base font-bold text-[#F5F7FA] flex items-center gap-2">
-                      <span>Usman thumps a breathtaking volley! (Assist: Abrar)</span>
-                      <span className="text-xs font-mono px-2 py-0.5 rounded bg-emerald-400/20 text-emerald-300">THUNDERBOLT VOLLEY</span>
+                      <span>Usman Solo Thunderbolt Golazo!</span>
+                      <span className="text-xs font-mono px-2 py-0.5 rounded bg-emerald-400/20 text-emerald-300">SOLO GOLAZO</span>
                     </h4>
                     <p className="text-xs text-[#929BA9] mt-1">
-                      Abrar burns past his marker down the left flank and floats a laser-guided cross towards the penalty spot. Usman connects cleanly on the half-volley, smashing it past the keeper into the top netting!
+                      Unassisted solo magic! Usman receives the ball in transition, drives past two MCS defenders with blistering pace and strength, and smashes an unstoppable thunderbolt rocket into the top corner for 2-2!
+                    </p>
+                  </div>
+                </div>
+
+                {/* 65' TACTICAL SUBSTITUTION: SAVAIZ OUT, RAFEEQ IN */}
+                <div className="relative group">
+                  <div className="absolute -left-[35px] sm:-left-[51px] top-1.5 w-7 h-7 rounded-full bg-emerald-500 text-white flex items-center justify-center font-black text-xs shadow-md">
+                    🔄
+                  </div>
+                  <div className="bg-[#171F2C] border border-emerald-500/30 p-5 rounded-2xl">
+                    <div className="flex items-center justify-between text-xs font-mono mb-1">
+                      <span className="text-emerald-400 font-bold">65&apos; — SUBSTITUTION (COACH FC)</span>
+                      <span className="text-[#929BA9]">Tactical Refresh</span>
+                    </div>
+                    <h4 className="text-sm font-bold text-emerald-300 flex items-center gap-2">
+                      <span>Rafeeq ON ⇄ Savaiz OFF</span>
+                      <span className="text-xs font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">IMPACT SUB</span>
+                    </h4>
+                    <p className="text-xs text-[#929BA9] mt-1">
+                      After 65 minutes of tireless high-pressing from starting forward Savaiz, coach brings on Rafeeq to inject dynamic pace and fresh pressing legs down the right channel.
                     </p>
                   </div>
                 </div>
@@ -1120,11 +1492,11 @@ export const MatchCenterView: React.FC = () => {
                       <span className="text-xs font-black text-[#F5F7FA]">2 - 3</span>
                     </div>
                     <h4 className="text-base font-bold text-[#F5F7FA] flex items-center gap-2">
-                      <span>Zohaib bullet header from Abrar’s cross!</span>
-                      <span className="text-xs font-mono px-2 py-0.5 rounded bg-cyan-400/20 text-cyan-300">BULLET HEADER</span>
+                      <span>Zohaib bullet header from Captain Abrar’s corner!</span>
+                      <span className="text-xs font-mono px-2 py-0.5 rounded bg-cyan-400/20 text-cyan-300">BULLET HEADER • ASSIST ABRAR</span>
                     </h4>
                     <p className="text-xs text-[#929BA9] mt-1">
-                      Captain Abrar swings in an unplayable set-piece cross right into the corridor of uncertainty (his 2nd assist!). Defender Zohaib leaps high above the MCS defense to direct a powerhouse header into the net!
+                      Captain Abrar swings in an unplayable set-piece corner cross right into the danger area (Abrar’s pinpoint assist!). Central defender Zohaib rises high above the MCS backline and powers an unstoppable bullet header into the net!
                     </p>
                   </div>
                 </div>
@@ -1144,12 +1516,12 @@ export const MatchCenterView: React.FC = () => {
                       <span className="text-xs font-mono px-2 py-0.5 rounded bg-amber-400/20 text-amber-300">SCORER 3</span>
                     </h4>
                     <p className="text-xs text-[#929BA9] mt-1">
-                      MCS Captains push everyone forward. Kamran strikes from 12 yards through a crowded box; the ball takes a slight deflection and creeps inside the left post to make it 3-3!
+                      MCS Captains push everyone forward. Kamran strikes from 12 yards through a crowded box; the ball takes a slight deflection off the defensive traffic and creeps inside the post to make it 3-3!
                     </p>
                   </div>
                 </div>
 
-                {/* 89' HAMZA FINGERTIP SAVE */}
+                {/* 89' JIBRAN FINGERTIP SAVE */}
                 <div className="relative group">
                   <div className="absolute -left-[35px] sm:-left-[51px] top-1.5 w-7 h-7 rounded-full bg-emerald-400 text-[#080B12] flex items-center justify-center font-black text-xs">
                     🧤
@@ -1160,10 +1532,10 @@ export const MatchCenterView: React.FC = () => {
                       <span className="text-[#929BA9]">Score: 3 - 3</span>
                     </div>
                     <h4 className="text-sm font-bold text-emerald-300">
-                      Hamza tips dipping shot over the crossbar
+                      Jibran tips dipping shot over the crossbar
                     </h4>
                     <p className="text-xs text-[#929BA9] mt-1">
-                      MCS Captains nearly steal victory in the dying seconds, but Hamza tracks the dipping drive all the way and paws it over the bar to ensure Coach FC leaves with a point!
+                      MCS Captains nearly steal victory in the dying seconds, but keeper Jibran tracks the dipping drive with feline agility and paws it over the bar to ensure Coach FC seals the point!
                     </p>
                   </div>
                 </div>
@@ -1457,48 +1829,113 @@ export const MatchCenterView: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Coach FC Lineup */}
+                {/* Coach FC Lineup (Verified 8-a-Side) */}
                 <div className="bg-[#171F2C] border border-[#C6FF00]/30 p-6 sm:p-8 rounded-3xl">
                   <div className="flex items-center justify-between mb-6 pb-4 border-b border-[#283141]">
                     <div>
-                      <h4 className="text-xl font-bold text-[#C6FF00]">Coach FC</h4>
-                      <span className="text-xs text-[#929BA9] font-mono">9 Big Chances Created • Dynamic Attacks</span>
+                      <div className="flex items-center gap-2">
+                        <h4 className="text-xl font-bold text-[#C6FF00]">Coach FC</h4>
+                        <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-[#C6FF00]/20 text-[#C6FF00]">8-A-SIDE</span>
+                      </div>
+                      <span className="text-xs text-[#929BA9] font-mono">8 Starters • 1 Tactical Substitution • 9 Big Chances</span>
                     </div>
                     <span className="text-3xl font-black text-[#C6FF00]">3</span>
                   </div>
 
-                  <div className="space-y-3 text-xs">
-                    <div className="p-3 rounded-xl bg-[#080B12] border border-blue-500/20 flex items-center justify-between">
-                      <span className="font-semibold">Hamza (Keeper • 8 Crucial Saves & Back-Heel OG)</span>
-                      <span className="font-mono text-blue-400 font-bold">GK • 6.8</span>
+                  {/* Starting 8 */}
+                  <div className="mb-4">
+                    <span className="text-[10px] font-mono text-[#929BA9] uppercase tracking-wider font-bold block mb-2">
+                      Confirmed Starting 8
+                    </span>
+                    <div className="space-y-2.5 text-xs">
+                      {/* Jibran (GK) */}
+                      <div className="p-3 rounded-xl bg-[#080B12] border border-cyan-500/20 flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <span className="w-6 h-6 rounded-lg bg-cyan-500/20 text-cyan-300 font-mono font-bold flex items-center justify-center text-[10px]">13</span>
+                          <span className="font-semibold text-[#F5F7FA]">Jibran (Goalkeeper • 8 Crucial Saves & Accidental OG)</span>
+                        </div>
+                        <span className="font-mono text-cyan-400 font-bold">GK • 7.2</span>
+                      </div>
+
+                      {/* Huzaifa (DEF) */}
+                      <div className="p-3 rounded-xl bg-[#080B12] flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <span className="w-6 h-6 rounded-lg bg-blue-500/20 text-blue-300 font-mono font-bold flex items-center justify-center text-[10px]">5</span>
+                          <span className="font-semibold text-[#F5F7FA]">Huzaifa (Central Defender • Defensively Superior Prowess)</span>
+                        </div>
+                        <span className="font-mono text-blue-400 font-bold">DEF • 7.3</span>
+                      </div>
+
+                      {/* Zohaib (DEF) */}
+                      <div className="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-between font-bold text-[#F5F7FA]">
+                        <div className="flex items-center gap-2">
+                          <span className="w-6 h-6 rounded-lg bg-cyan-500/30 text-cyan-200 font-mono font-bold flex items-center justify-center text-[10px]">16</span>
+                          <span>Zohaib (Central Defender • 76&apos; Bullet Header Goal)</span>
+                        </div>
+                        <span className="font-mono text-cyan-300 font-black">DEF • 7.1</span>
+                      </div>
+
+                      {/* Aliyan (DEF) */}
+                      <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between font-bold text-[#F5F7FA]">
+                        <div className="flex items-center gap-2">
+                          <span className="w-6 h-6 rounded-lg bg-emerald-500/30 text-emerald-200 font-mono font-bold flex items-center justify-center text-[10px]">26</span>
+                          <span>Aliyan (Flank Defender • 16 Clean Sheets Leader)</span>
+                        </div>
+                        <span className="font-mono text-emerald-400 font-black">DEF • 7.8</span>
+                      </div>
+
+                      {/* Faheem (MID) */}
+                      <div className="p-3 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-between font-bold text-[#F5F7FA]">
+                        <div className="flex items-center gap-2">
+                          <span className="w-6 h-6 rounded-lg bg-purple-500/30 text-purple-200 font-mono font-bold flex items-center justify-center text-[10px]">6</span>
+                          <span>Faheem (Midfield Playmaker • Tempo & Distribution)</span>
+                        </div>
+                        <span className="font-mono text-purple-300 font-black">MID • 7.6</span>
+                      </div>
+
+                      {/* Abrar (MID - Captain) */}
+                      <div className="p-3 rounded-xl bg-[#C6FF00]/15 border border-[#C6FF00] flex items-center justify-between font-bold text-[#F5F7FA] shadow-[0_0_15px_rgba(198,255,0,0.2)]">
+                        <div className="flex items-center gap-2">
+                          <span className="w-6 h-6 rounded-lg bg-[#C6FF00] text-[#080B12] font-mono font-black flex items-center justify-center text-[10px]">8</span>
+                          <span>Abrar (Captain • 9 Big Chances • 1 Solo Goal & 1 Assist)</span>
+                        </div>
+                        <span className="font-mono text-[#C6FF00] font-black">MID • 9.8 ⭐</span>
+                      </div>
+
+                      {/* Usman (MID/FWD) */}
+                      <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between font-bold text-[#F5F7FA]">
+                        <div className="flex items-center gap-2">
+                          <span className="w-6 h-6 rounded-lg bg-emerald-500/30 text-emerald-200 font-mono font-bold flex items-center justify-center text-[10px]">20</span>
+                          <span>Usman (Midfielder • 64&apos; Solo Thunderbolt Golazo!)</span>
+                        </div>
+                        <span className="font-mono text-emerald-400 font-black">MID • 8.8</span>
+                      </div>
+
+                      {/* Savaiz (FWD - Subbed 65') */}
+                      <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between font-bold text-[#F5F7FA]">
+                        <div className="flex items-center gap-2">
+                          <span className="w-6 h-6 rounded-lg bg-amber-500/30 text-amber-200 font-mono font-bold flex items-center justify-center text-[10px]">29</span>
+                          <span>Savaiz (Starting Forward • Subbed 65&apos; for Rafeeq)</span>
+                        </div>
+                        <span className="font-mono text-amber-300 font-black">FWD • 7.0</span>
+                      </div>
                     </div>
-                    <div className="p-3 rounded-xl bg-[#080B12] flex items-center justify-between">
-                      <span className="font-semibold">Jamshaid (Right Back • Hard Tackler)</span>
-                      <span className="font-mono text-[#929BA9] font-bold">DEF • 7.4</span>
-                    </div>
-                    <div className="p-3 rounded-xl bg-[#080B12] flex items-center justify-between">
-                      <span className="font-semibold">Huzaifa (Center Back • Defensive Shifts)</span>
-                      <span className="font-mono text-[#929BA9] font-bold">DEF • 6.9</span>
-                    </div>
-                    <div className="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-between font-bold text-[#F5F7FA]">
-                      <span>Zohaib (Center Back • 76&apos; Bullet Header Goal)</span>
-                      <span className="font-mono text-cyan-300 font-black">DEF • 7.8</span>
-                    </div>
-                    <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between font-bold text-[#F5F7FA]">
-                      <span>Aliyan (Wing Back • 16 Clean Sheets Leader)</span>
-                      <span className="font-mono text-emerald-400 font-black">DEF • 8.1</span>
-                    </div>
-                    <div className="p-3 rounded-xl bg-[#C6FF00]/15 border border-[#C6FF00] flex items-center justify-between font-bold text-[#F5F7FA] shadow-[0_0_15px_rgba(198,255,0,0.2)]">
-                      <span>Abrar (Captain • 9 Big Chances Created • 1 Goal & 2 Assists)</span>
-                      <span className="font-mono text-[#C6FF00] font-black">MID • 9.8 ⭐</span>
-                    </div>
-                    <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between font-bold text-[#F5F7FA]">
-                      <span>Usman (Midfielder • 64&apos; Thunderbolt Volley)</span>
-                      <span className="font-mono text-emerald-400 font-black">MID • 8.6</span>
-                    </div>
-                    <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between font-bold text-[#F5F7FA]">
-                      <span>Savaiz (Forward • Attacking Threat)</span>
-                      <span className="font-mono text-amber-300 font-black">FWD • 7.3</span>
+                  </div>
+
+                  {/* Tactical Substitutes */}
+                  <div className="pt-3 border-t border-[#283141]">
+                    <span className="text-[10px] font-mono text-[#929BA9] uppercase tracking-wider font-bold block mb-2">
+                      Tactical Substitution (65&apos;)
+                    </span>
+                    <div className="p-3 rounded-xl bg-[#080B12] border border-emerald-500/30 flex items-center justify-between text-xs">
+                      <div className="flex items-center gap-2">
+                        <span className="w-6 h-6 rounded-lg bg-emerald-500/20 text-emerald-300 font-mono font-bold flex items-center justify-center text-[10px]">18</span>
+                        <div>
+                          <span className="font-bold text-emerald-400">Rafeeq (Impact Sub • Replaced Savaiz 65&apos;)</span>
+                          <span className="block text-[10px] text-[#929BA9]">Injected high pace and defensive pressing in final 25 minutes</span>
+                        </div>
+                      </div>
+                      <span className="font-mono text-emerald-400 font-bold">FWD • 7.2</span>
                     </div>
                   </div>
                 </div>
@@ -2427,6 +2864,461 @@ export const MatchCenterView: React.FC = () => {
           </Link>
         </div>
       </section>
+
+      {/* ADMIN MODAL: EDIT PLAYER */}
+      {editingPlayer && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
+          <div className="bg-[#171F2C] border border-[#C6FF00]/50 rounded-3xl p-6 sm:p-8 max-w-xl w-full shadow-[0_25px_60px_rgba(0,0,0,0.8)] max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between pb-4 border-b border-[#283141] mb-6">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-[#C6FF00]/20 border border-[#C6FF00] flex items-center justify-center text-[#C6FF00]">
+                  <Edit3 className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-black text-[#F5F7FA]">Edit Player Card & Rating</h3>
+                  <span className="text-xs text-[#929BA9] font-mono">Modifying details for {editingPlayer.player.name}</span>
+                </div>
+              </div>
+              <button 
+                onClick={() => setEditingPlayer(null)}
+                className="w-8 h-8 rounded-lg bg-[#080B12] hover:bg-[#283141] text-[#929BA9] hover:text-white flex items-center justify-center"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSaveEditedPlayer(editingPlayer.player);
+              }}
+              className="space-y-4 text-xs font-mono"
+            >
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="text-[#929BA9] block mb-1 font-bold">Player Name</label>
+                  <input
+                    type="text"
+                    value={editingPlayer.player.name}
+                    onChange={(e) => setEditingPlayer({
+                      ...editingPlayer,
+                      player: { ...editingPlayer.player, name: e.target.value }
+                    })}
+                    className="w-full bg-[#080B12] border border-[#283141] focus:border-[#C6FF00] rounded-xl px-3 py-2 text-[#F5F7FA] outline-none"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="text-[#929BA9] block mb-1 font-bold">Shirt Number</label>
+                  <input
+                    type="number"
+                    value={editingPlayer.player.number}
+                    onChange={(e) => setEditingPlayer({
+                      ...editingPlayer,
+                      player: { ...editingPlayer.player, number: parseInt(e.target.value) || 0 }
+                    })}
+                    className="w-full bg-[#080B12] border border-[#283141] focus:border-[#C6FF00] rounded-xl px-3 py-2 text-[#F5F7FA] outline-none"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="text-[#929BA9] block mb-1 font-bold">Position</label>
+                  <input
+                    type="text"
+                    value={editingPlayer.player.position}
+                    onChange={(e) => setEditingPlayer({
+                      ...editingPlayer,
+                      player: { ...editingPlayer.player, position: e.target.value }
+                    })}
+                    className="w-full bg-[#080B12] border border-[#283141] focus:border-[#C6FF00] rounded-xl px-3 py-2 text-[#F5F7FA] outline-none"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="text-[#929BA9] block mb-1 font-bold">Team</label>
+                  <select
+                    value={editingPlayer.player.team}
+                    onChange={(e) => setEditingPlayer({
+                      ...editingPlayer,
+                      player: { ...editingPlayer.player, team: e.target.value as 'Coach FC' | 'Blue Lock FC' }
+                    })}
+                    className="w-full bg-[#080B12] border border-[#283141] focus:border-[#C6FF00] rounded-xl px-3 py-2 text-[#F5F7FA] outline-none"
+                  >
+                    <option value="Coach FC">Coach FC</option>
+                    <option value="Blue Lock FC">Blue Lock FC</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* RATING SLIDER */}
+              <div className="p-4 rounded-2xl bg-[#080B12] border border-[#283141]">
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-[#929BA9] font-bold">Match Rating (1.0 - 10.0)</label>
+                  <span className={`px-2.5 py-0.5 rounded-lg text-xs font-black ${
+                    editingPlayer.player.rating >= 9.0 ? 'bg-[#C6FF00] text-[#080B12]' :
+                    editingPlayer.player.rating >= 8.0 ? 'bg-blue-500 text-white' :
+                    'bg-[#171F2C] text-white border border-[#283141]'
+                  }`}>
+                    {editingPlayer.player.rating.toFixed(1)} / 10
+                  </span>
+                </div>
+                <input
+                  type="range"
+                  min="1.0"
+                  max="10.0"
+                  step="0.1"
+                  value={editingPlayer.player.rating}
+                  onChange={(e) => setEditingPlayer({
+                    ...editingPlayer,
+                    player: { ...editingPlayer.player, rating: parseFloat(e.target.value) }
+                  })}
+                  className="w-full accent-[#C6FF00] cursor-pointer"
+                />
+              </div>
+
+              {/* STAT COUNTERS */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div>
+                  <label className="text-[#929BA9] block mb-1">Goals</label>
+                  <input
+                    type="number"
+                    min="0"
+                    value={editingPlayer.player.goals}
+                    onChange={(e) => setEditingPlayer({
+                      ...editingPlayer,
+                      player: { ...editingPlayer.player, goals: parseInt(e.target.value) || 0 }
+                    })}
+                    className="w-full bg-[#080B12] border border-[#283141] rounded-xl px-2.5 py-1.5 text-[#F5F7FA]"
+                  />
+                </div>
+                <div>
+                  <label className="text-[#929BA9] block mb-1">Assists</label>
+                  <input
+                    type="number"
+                    min="0"
+                    value={editingPlayer.player.assists}
+                    onChange={(e) => setEditingPlayer({
+                      ...editingPlayer,
+                      player: { ...editingPlayer.player, assists: parseInt(e.target.value) || 0 }
+                    })}
+                    className="w-full bg-[#080B12] border border-[#283141] rounded-xl px-2.5 py-1.5 text-[#F5F7FA]"
+                  />
+                </div>
+                <div>
+                  <label className="text-[#929BA9] block mb-1">Chances</label>
+                  <input
+                    type="number"
+                    min="0"
+                    value={editingPlayer.player.chancesCreated}
+                    onChange={(e) => setEditingPlayer({
+                      ...editingPlayer,
+                      player: { ...editingPlayer.player, chancesCreated: parseInt(e.target.value) || 0 }
+                    })}
+                    className="w-full bg-[#080B12] border border-[#283141] rounded-xl px-2.5 py-1.5 text-[#F5F7FA]"
+                  />
+                </div>
+                <div>
+                  <label className="text-[#929BA9] block mb-1">Missed</label>
+                  <input
+                    type="number"
+                    min="0"
+                    value={editingPlayer.player.missedChances}
+                    onChange={(e) => setEditingPlayer({
+                      ...editingPlayer,
+                      player: { ...editingPlayer.player, missedChances: parseInt(e.target.value) || 0 }
+                    })}
+                    className="w-full bg-[#080B12] border border-[#283141] rounded-xl px-2.5 py-1.5 text-[#F5F7FA]"
+                  />
+                </div>
+              </div>
+
+              {/* HIGHLIGHT BADGE */}
+              <div>
+                <label className="text-[#929BA9] block mb-1 font-bold">Highlight Badge Text</label>
+                <input
+                  type="text"
+                  placeholder="e.g. ⭐ SUPER MAN OF THE MATCH or 🧤 8 CLUTCH SAVES"
+                  value={editingPlayer.player.highlightBadge || ''}
+                  onChange={(e) => setEditingPlayer({
+                    ...editingPlayer,
+                    player: { ...editingPlayer.player, highlightBadge: e.target.value }
+                  })}
+                  className="w-full bg-[#080B12] border border-[#283141] focus:border-[#C6FF00] rounded-xl px-3 py-2 text-[#F5F7FA] outline-none"
+                />
+              </div>
+
+              {/* KEY STATS */}
+              <div>
+                <label className="text-[#929BA9] block mb-1 font-bold">Key Stats Bar Text</label>
+                <input
+                  type="text"
+                  value={editingPlayer.player.keyStats}
+                  onChange={(e) => setEditingPlayer({
+                    ...editingPlayer,
+                    player: { ...editingPlayer.player, keyStats: e.target.value }
+                  })}
+                  className="w-full bg-[#080B12] border border-[#283141] focus:border-[#C6FF00] rounded-xl px-3 py-2 text-[#F5F7FA] outline-none"
+                  required
+                />
+              </div>
+
+              {/* VERDICT */}
+              <div>
+                <label className="text-[#929BA9] block mb-1 font-bold">Performance Verdict</label>
+                <textarea
+                  rows={3}
+                  value={editingPlayer.player.verdict}
+                  onChange={(e) => setEditingPlayer({
+                    ...editingPlayer,
+                    player: { ...editingPlayer.player, verdict: e.target.value }
+                  })}
+                  className="w-full bg-[#080B12] border border-[#283141] focus:border-[#C6FF00] rounded-xl p-3 text-[#F5F7FA] outline-none leading-relaxed"
+                  required
+                />
+              </div>
+
+              <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#283141]">
+                <button
+                  type="button"
+                  onClick={() => setEditingPlayer(null)}
+                  className="px-5 py-2.5 rounded-xl bg-[#080B12] hover:bg-[#283141] text-[#929BA9] hover:text-[#F5F7FA] transition-all font-bold"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-6 py-2.5 rounded-xl bg-[#C6FF00] text-[#080B12] hover:bg-lime-400 transition-all font-black flex items-center gap-2 shadow-lg"
+                >
+                  <Save className="w-4 h-4" />
+                  <span>Save Changes</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* ADMIN MODAL: ADD PLAYER */}
+      {isAddPlayerOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
+          <div className="bg-[#171F2C] border border-[#C6FF00]/50 rounded-3xl p-6 sm:p-8 max-w-xl w-full shadow-[0_25px_60px_rgba(0,0,0,0.8)] max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between pb-4 border-b border-[#283141] mb-6">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-[#C6FF00]/20 border border-[#C6FF00] flex items-center justify-center text-[#C6FF00]">
+                  <UserPlus className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-black text-[#F5F7FA]">Add Player to Match</h3>
+                  <span className="text-xs text-[#929BA9] font-mono">Include player in ratings and verified lineup</span>
+                </div>
+              </div>
+              <button 
+                onClick={() => setIsAddPlayerOpen(false)}
+                className="w-8 h-8 rounded-lg bg-[#080B12] hover:bg-[#283141] text-[#929BA9] hover:text-white flex items-center justify-center"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Quick preset selector */}
+            <div className="mb-4 p-3 rounded-2xl bg-[#080B12] border border-[#283141]">
+              <label className="text-[11px] font-mono text-[#C6FF00] block mb-1 font-bold">
+                ⚡ Pick from Coach FC Club Roster:
+              </label>
+              <select
+                onChange={(e) => {
+                  const preset = SQUAD_PRESETS.find(p => p.name === e.target.value);
+                  if (preset) {
+                    setNewPlayerForm(prev => ({
+                      ...prev,
+                      name: preset.name,
+                      number: preset.number,
+                      position: preset.position,
+                      photoUrl: preset.photoUrl,
+                      photoFullKitUrl: preset.photoUrl
+                    }));
+                  }
+                }}
+                className="w-full bg-[#171F2C] border border-[#283141] text-[#F5F7FA] text-xs font-mono rounded-xl p-2 outline-none"
+              >
+                <option value="">-- Choose Club Player to Auto-Fill --</option>
+                {SQUAD_PRESETS.map((sp, idx) => (
+                  <option key={idx} value={sp.name}>
+                    #{sp.number} {sp.name} ({sp.position})
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleAddPlayer(newPlayerForm);
+              }}
+              className="space-y-4 text-xs font-mono"
+            >
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="text-[#929BA9] block mb-1 font-bold">Player Name</label>
+                  <input
+                    type="text"
+                    value={newPlayerForm.name}
+                    onChange={(e) => setNewPlayerForm({ ...newPlayerForm, name: e.target.value })}
+                    className="w-full bg-[#080B12] border border-[#283141] focus:border-[#C6FF00] rounded-xl px-3 py-2 text-[#F5F7FA] outline-none"
+                    placeholder="e.g. Faheem"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="text-[#929BA9] block mb-1 font-bold">Shirt Number</label>
+                  <input
+                    type="number"
+                    value={newPlayerForm.number}
+                    onChange={(e) => setNewPlayerForm({ ...newPlayerForm, number: parseInt(e.target.value) || 0 })}
+                    className="w-full bg-[#080B12] border border-[#283141] focus:border-[#C6FF00] rounded-xl px-3 py-2 text-[#F5F7FA] outline-none"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="text-[#929BA9] block mb-1 font-bold">Position</label>
+                  <input
+                    type="text"
+                    value={newPlayerForm.position}
+                    onChange={(e) => setNewPlayerForm({ ...newPlayerForm, position: e.target.value })}
+                    className="w-full bg-[#080B12] border border-[#283141] focus:border-[#C6FF00] rounded-xl px-3 py-2 text-[#F5F7FA] outline-none"
+                    placeholder="e.g. Midfield / Playmaker"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="text-[#929BA9] block mb-1 font-bold">Role in Match</label>
+                  <select
+                    value={newPlayerForm.isStarting ? 'STARTER' : 'SUB'}
+                    onChange={(e) => setNewPlayerForm({ ...newPlayerForm, isStarting: e.target.value === 'STARTER' })}
+                    className="w-full bg-[#080B12] border border-[#283141] focus:border-[#C6FF00] rounded-xl px-3 py-2 text-[#F5F7FA] outline-none"
+                  >
+                    <option value="STARTER">Starting Lineup</option>
+                    <option value="SUB">Substitute</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* RATING SLIDER */}
+              <div className="p-4 rounded-2xl bg-[#080B12] border border-[#283141]">
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-[#929BA9] font-bold">Initial Rating</label>
+                  <span className="px-2.5 py-0.5 rounded-lg text-xs font-black bg-[#C6FF00] text-[#080B12]">
+                    {newPlayerForm.rating.toFixed(1)} / 10
+                  </span>
+                </div>
+                <input
+                  type="range"
+                  min="1.0"
+                  max="10.0"
+                  step="0.1"
+                  value={newPlayerForm.rating}
+                  onChange={(e) => setNewPlayerForm({ ...newPlayerForm, rating: parseFloat(e.target.value) })}
+                  className="w-full accent-[#C6FF00] cursor-pointer"
+                />
+              </div>
+
+              {/* STAT COUNTERS */}
+              <div className="grid grid-cols-3 gap-3">
+                <div>
+                  <label className="text-[#929BA9] block mb-1">Goals</label>
+                  <input
+                    type="number"
+                    min="0"
+                    value={newPlayerForm.goals}
+                    onChange={(e) => setNewPlayerForm({ ...newPlayerForm, goals: parseInt(e.target.value) || 0 })}
+                    className="w-full bg-[#080B12] border border-[#283141] rounded-xl px-2.5 py-1.5 text-[#F5F7FA]"
+                  />
+                </div>
+                <div>
+                  <label className="text-[#929BA9] block mb-1">Assists</label>
+                  <input
+                    type="number"
+                    min="0"
+                    value={newPlayerForm.assists}
+                    onChange={(e) => setNewPlayerForm({ ...newPlayerForm, assists: parseInt(e.target.value) || 0 })}
+                    className="w-full bg-[#080B12] border border-[#283141] rounded-xl px-2.5 py-1.5 text-[#F5F7FA]"
+                  />
+                </div>
+                <div>
+                  <label className="text-[#929BA9] block mb-1">Chances</label>
+                  <input
+                    type="number"
+                    min="0"
+                    value={newPlayerForm.chancesCreated}
+                    onChange={(e) => setNewPlayerForm({ ...newPlayerForm, chancesCreated: parseInt(e.target.value) || 0 })}
+                    className="w-full bg-[#080B12] border border-[#283141] rounded-xl px-2.5 py-1.5 text-[#F5F7FA]"
+                  />
+                </div>
+              </div>
+
+              {/* HIGHLIGHT BADGE */}
+              <div>
+                <label className="text-[#929BA9] block mb-1 font-bold">Highlight Badge</label>
+                <input
+                  type="text"
+                  placeholder="e.g. ⚡ MIDFIELD ENGINE"
+                  value={newPlayerForm.highlightBadge || ''}
+                  onChange={(e) => setNewPlayerForm({ ...newPlayerForm, highlightBadge: e.target.value })}
+                  className="w-full bg-[#080B12] border border-[#283141] focus:border-[#C6FF00] rounded-xl px-3 py-2 text-[#F5F7FA] outline-none"
+                />
+              </div>
+
+              {/* KEY STATS & VERDICT */}
+              <div>
+                <label className="text-[#929BA9] block mb-1 font-bold">Key Stats</label>
+                <input
+                  type="text"
+                  placeholder="e.g. 85% Pass Acc • 3 Tackles • Controlled Midfield"
+                  value={newPlayerForm.keyStats}
+                  onChange={(e) => setNewPlayerForm({ ...newPlayerForm, keyStats: e.target.value })}
+                  className="w-full bg-[#080B12] border border-[#283141] focus:border-[#C6FF00] rounded-xl px-3 py-2 text-[#F5F7FA] outline-none"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="text-[#929BA9] block mb-1 font-bold">Performance Verdict</label>
+                <textarea
+                  rows={2}
+                  placeholder="Summary of player's match performance..."
+                  value={newPlayerForm.verdict}
+                  onChange={(e) => setNewPlayerForm({ ...newPlayerForm, verdict: e.target.value })}
+                  className="w-full bg-[#080B12] border border-[#283141] focus:border-[#C6FF00] rounded-xl p-3 text-[#F5F7FA] outline-none"
+                  required
+                />
+              </div>
+
+              <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#283141]">
+                <button
+                  type="button"
+                  onClick={() => setIsAddPlayerOpen(false)}
+                  className="px-5 py-2.5 rounded-xl bg-[#080B12] hover:bg-[#283141] text-[#929BA9] hover:text-[#F5F7FA] transition-all font-bold"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-6 py-2.5 rounded-xl bg-[#C6FF00] text-[#080B12] hover:bg-lime-400 transition-all font-black flex items-center gap-2 shadow-lg"
+                >
+                  <Plus className="w-4 h-4" />
+                  <span>Add Player</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
       {/* STADIUM ANTHEM AUDIO PLAYER (ALLEZ ALLEZ ALLEZ) */}
       <StadiumAudioPlayer />
